@@ -1,0 +1,27 @@
+using FluentValidation;
+using RGamaFelix.TimeTracker.Rest.Model;
+
+namespace RGamaFelix.TimeTracker.Domain.Service.Validator;
+
+public class CreateUserRequestValidator : AbstractValidator<CreateRegularUserRequest>
+{
+    public const string EmptyName = "EmptyName";
+    public const string EmptyEmail = "EmptyEmail";
+    public const string InvalidEmail = "InvalidEmail";
+    public const string EmptyPassword = "EmptyPassword";
+    public const string InvalidPassword = "InvalidPassword";
+    public CreateUserRequestValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty().WithMessage(EmptyName);
+        RuleFor(x => x.Email).NotEmpty().WithMessage(EmptyEmail);
+        RuleFor(x => x.Email)
+            .Matches(@"^(?!\.)[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$")
+            .WithMessage(InvalidEmail);
+        RuleFor(x => x.Password).NotEmpty().WithMessage(EmptyPassword);
+        RuleFor(x => x.Password).Matches(@"\d").WithMessage(InvalidPassword);
+        RuleFor(x => x.Password).Matches(@"[a-z]").WithMessage(InvalidPassword);
+        RuleFor(x => x.Password).Matches(@"[A-Z]").WithMessage(InvalidPassword);
+        RuleFor(x => x.Password).Matches(@"[^\da-zA-Z]").WithMessage(InvalidPassword);
+        RuleFor(x => x.Password).MinimumLength(8).WithMessage(InvalidPassword);
+    }
+}

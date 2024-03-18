@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latestmajor</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Model\RGamaFelix.TimeTracker.Domain.Model.csproj" />
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Model\RGamaFelix.TimeTracker.Rest.Model.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
+    </ItemGroup>
+
+
+
+</Project>

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latestmajor</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.ApplicationService\RGamaFelix.TimeTracker.ApplicationService.csproj" />
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Model\RGamaFelix.TimeTracker.Domain.Model.csproj" />
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository\RGamaFelix.TimeTracker.Repository.csproj" />
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Model\RGamaFelix.TimeTracker.Rest.Model.csproj" />
+      <ProjectReference Include="..\RGamaFelix.TimeTracker.ServiceResponse.FluentValidation\RGamaFelix.TimeTracker.ServiceResponse.FluentValidation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.9.0" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+      <PackageReference Include="MediatR" Version="12.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+      <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1" />
+    </ItemGroup>
+
+
+
+
+
+</Project>
