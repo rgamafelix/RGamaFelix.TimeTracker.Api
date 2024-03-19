@@ -32,5 +32,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.AddMiddlewares();
 
 app.Run();

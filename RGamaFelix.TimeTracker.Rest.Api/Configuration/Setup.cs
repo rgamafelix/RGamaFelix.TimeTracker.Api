@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Repository;
+using RGamaFelix.TimeTracker.Rest.Api.Controllers.Middleware;
 
 namespace RGamaFelix.TimeTracker.Rest.Api.Configuration;
 
@@ -42,6 +43,11 @@ public static class Setup
 
 
         return services;
+    }
+    
+    public static IApplicationBuilder AddMiddlewares(this IApplicationBuilder app) 
+    {
+        return app.UseMiddleware<TokenValidationMiddleware>();
     }
     public static IMvcBuilder AddTimeTrackerControllers(this IMvcBuilder mvcBuilder)
     {

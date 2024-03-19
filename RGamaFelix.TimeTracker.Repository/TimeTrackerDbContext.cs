@@ -16,10 +16,26 @@ public partial class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole
 
     public DbSet<Client> Clients { get; set; }
     public DbSet<Audit> Audits { get; set; }
+    public DbSet<User> User { get; set; }
 
     protected override void OnModelCreating(ModelBuilder model)
     {
         base.OnModelCreating(model);
-        model.Entity<Client>(entity => { entity.ToTable("Client"); });
+        model.Entity<Client>(entity =>
+        {
+            entity.ToTable("Client");
+            entity.HasKey(e => e.Id);
+        });
+
+        model.Entity<Audit>(entity =>
+        {
+            entity.ToTable("Audit");
+            entity.HasKey(e => e.Id);
+        });
+        model.Entity<User>(entity =>
+        {
+            entity.ToTable("User");
+            entity.HasKey(e => e.Id);
+        });
     }
 }

@@ -23,9 +23,8 @@ Aside of those core projects there are also the following accessory projects:
 
 create a new migration:
 
-`$ dotnet ef migrations add "Create Client Table" --project RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql  --startup-project RGamaFelix.TimeTracker.EntryPoint --context TimeTrackerDbContext`
+`$ dotnet ef migrations add "InitialDatabase" --project RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql  --startup-project RGamaFelix.TimeTracker.Rest.EntryPoint --context TimeTrackerDbContext`
 
 update database:
 
-`$ dotnet ef database update --project RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql  --startup-project RGamaFelix.TimeTracker.EntryPoint
-`
+`$ dotnet ef database update --project RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql  --startup-project RGamaFelix.TimeTracker.Rest.EntryPoint`
