@@ -8,9 +8,8 @@ namespace RGamaFelix.TimeTracker.Repository;
 public partial class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public TimeTrackerDbContext()
-    {
-        
-    }
+    { }
+
     public TimeTrackerDbContext(DbContextOptions<TimeTrackerDbContext> options) : base(options)
     { }
 
@@ -32,6 +31,7 @@ public partial class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole
             entity.ToTable("Audit");
             entity.HasKey(e => e.Id);
         });
+
         model.Entity<User>(entity =>
         {
             entity.ToTable("User");

@@ -11,8 +11,9 @@ public class AuthenticationResolver : IAuthenticationResolver
     {
         _httpContext = httpContextAccessor.HttpContext;
     }
-    public bool Resolve(bool requireAuthentication,
-        IEnumerable<string>? permittedRoles = null, IEnumerable<Claim>? requiredClaims = null)
+
+    public bool Resolve(bool requireAuthentication, IEnumerable<string>? permittedRoles = null,
+        IEnumerable<Claim>? requiredClaims = null)
     {
         if (!requireAuthentication)
         {

@@ -11,7 +11,6 @@ public class ControllerHelper
         TRequest request, CancellationToken cancellationToken) where TRequest : IRequest<IServiceResultOf<TResponse>>
     {
         var result = await mediator.Send(request, cancellationToken);
-
         if (!result.IsSuccess)
         {
             logger.LogError("{REQUEST} failed: {ERROR}", nameof(TRequest), result.ToErrorString());

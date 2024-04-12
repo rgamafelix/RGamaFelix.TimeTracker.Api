@@ -16,7 +16,7 @@ public class CreateUserValidatorTests
     {
         // Arrange
         var validator = new CreateUserRequestValidator();
-        var request = new CreateRegularUserRequest(name!, "valid@email.com", "V@l1dPwd");
+        var request = new CreateRegularUserRequest(name!, "valid@email.com", "V@l2dPwd");
 
         // Act
         var result = await validator.TestValidateAsync(request);
@@ -94,7 +94,84 @@ public class CreateUserValidatorTests
         var result = await validator.TestValidateAsync(request);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Password).WithErrorMessage(CreateUserRequestValidator.InvalidPassword);
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+            .WithErrorMessage(CreateUserRequestValidator.InvalidPassword);
+    }
+
+    [Fact]
+    public async Task When_PasswordIsTooShort_ShouldReturn_PasswordTooShortError()
+    {
+        // Arrange
+        var validator = new CreateUserRequestValidator();
+        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", "inV@l1d");
+
+        // Act
+        var result = await validator.TestValidateAsync(request);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+            .WithErrorMessage(CreateUserRequestValidator.PasswordTooShort);
+    }
+
+    [Fact]
+    public async Task When_PasswordDoesNotContainNumber_ShouldReturn_PasswordMustContainNumberError()
+    {
+        // Arrange
+        var validator = new CreateUserRequestValidator();
+        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", "P@ssword");
+
+        // Act
+        var result = await validator.TestValidateAsync(request);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+            .WithErrorMessage(CreateUserRequestValidator.PasswordMustContainNumber);
+    }
+
+    [Fact]
+    public async Task When_PasswordDoesNotContainLowerCaseLetter_ShouldReturn_PasswordMustContainLowerCaseLetterError()
+    {
+        // Arrange
+        var validator = new CreateUserRequestValidator();
+        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", "P@SSW0RD");
+
+        // Act
+        var result = await validator.TestValidateAsync(request);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+            .WithErrorMessage(CreateUserRequestValidator.PasswordMustContainLowerCaseLetter);
+    }
+
+    [Fact]
+    public async Task When_PasswordDoesNotContainUpperCaseLetter_ShouldReturn_PasswordMustContainUpperCaseLetterError()
+    {
+        // Arrange
+        var validator = new CreateUserRequestValidator();
+        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", "p@ssw0rd");
+
+        // Act
+        var result = await validator.TestValidateAsync(request);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+            .WithErrorMessage(CreateUserRequestValidator.PasswordMustContainUpperCaseLetter);
+    }
+
+    [Fact]
+    public async Task
+        When_PasswordDoesNotContainSpecialCharacter_ShouldReturn_PasswordMustContainSpecialCharacterError()
+    {
+        // Arrange
+        var validator = new CreateUserRequestValidator();
+        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", "Passw0rd");
+
+        // Act
+        var result = await validator.TestValidateAsync(request);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+            .WithErrorMessage(CreateUserRequestValidator.PasswordMustContainSpecialCharacter);
     }
 
     [Fact]

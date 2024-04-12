@@ -3,10 +3,11 @@ using RGamaFelix.TimeTracker.Rest.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Validator;
 
-public class SignInRequestValidator:AbstractValidator<SignInRequest>
+public class SignInRequestValidator : AbstractValidator<SignInRequest>
 {
     public const string Emptyusername = "EmptyUserName";
     public const string Emptypassword = "EmptyPassword";
+
     public SignInRequestValidator()
     {
         RuleFor(x => x.UserName).NotEmpty().WithMessage(Emptyusername);

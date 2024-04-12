@@ -8,7 +8,9 @@ public class DataContextFixture : IDisposable
 {
     public DataContextFixture()
     {
-        var options = new DbContextOptionsBuilder<TimeTrackerDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+        var options = new DbContextOptionsBuilder<TimeTrackerDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
+
         Context = new TimeTrackerDbContext(options);
         Context.Users.Add(User.Create("ExistingUser", "existing@email.com"));
         Context.SaveChanges();

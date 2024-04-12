@@ -8,6 +8,7 @@ namespace RGamaFelix.TimeTracker.Rest.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
+[Consumes(MediaTypeNames.Application.Json)]
 public class ClientController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,10 +21,11 @@ public class ClientController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResponse<ListClientResponse>))]
     public async Task<IActionResult> ListClient(ListClientRequest request,
         CancellationToken cancellationToken = default)
     {
-        return await ControllerHelper.ProcessRequest<ListClientRequest, PagedResponse<ListClientResponse>>(_mediator, _logger, request,
-            cancellationToken);
+        return await ControllerHelper.ProcessRequest<ListClientRequest, PagedResponse<ListClientResponse>>(_mediator,
+            _logger, request, cancellationToken);
     }
 }

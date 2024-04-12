@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace RGamaFelix.TimeTracker.Domain.Model;
 
 public class Audit
@@ -20,7 +18,7 @@ public class Audit
             Action = action,
             Entity = entity,
             EntityType = entityType,
-            Date = DateTime.Now,
+            Date = DateTime.UtcNow,
             Memo = memo
         };
     }

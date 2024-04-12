@@ -1,5 +1,4 @@
 using System.Net;
-using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity;
 
 namespace RGamaFelix.TimeTracker.Domain.Model;
@@ -20,6 +19,7 @@ public class User : IdentityUser<Guid>, IEntityBase
     {
         var session = Session.Create(this, accessToken, accessTokenExpiresAt, refreshToken, refreshTokenExpiresAt,
             requestIp);
+
         _sessions.Add(session);
         return session;
     }
@@ -35,7 +35,7 @@ public class User : IdentityUser<Guid>, IEntityBase
     }
 
     /// <summary>
-    /// Replaces the current session with a new one.
+    ///     Replaces the current session with a new one.
     /// </summary>
     /// <param name="currentSession"></param>
     /// <param name="accessToken"></param>
@@ -48,6 +48,7 @@ public class User : IdentityUser<Guid>, IEntityBase
     {
         var newSession = AddSession(accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
             ipAddress);
+
         currentSession.Revoke(SessionRevocationReason.TokenReplaced, newSession);
     }
 }

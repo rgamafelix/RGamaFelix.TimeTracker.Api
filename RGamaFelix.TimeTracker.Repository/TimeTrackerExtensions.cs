@@ -11,11 +11,9 @@ public static class TimeTrackerExtensions
         params string[] includes) where TEntity : class
     {
         IQueryable<TEntity> items;
-
         if (includes.Length != 0)
         {
             var iSet = set.Include(includes[0]);
-
             foreach (var include in includes.Skip(1))
             {
                 iSet = iSet.Include(include);

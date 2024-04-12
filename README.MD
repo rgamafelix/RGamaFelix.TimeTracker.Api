@@ -19,6 +19,10 @@ Aside of those core projects there are also the following accessory projects:
 * **ServiceResponse.FluentValidation**: This project contains the extensions to **FluentValidation** that help integrate with **RGamaFelix.ServiceResponse**.
 * **Repository.Adapter.PostgresSql**: This project contains the code to run the **Reposritory** in a **Postgres** database.
 
+## Pre Requisites
+* dotnet sdk v8 
+* docker for running the database
+
 
 
 create a new migration:

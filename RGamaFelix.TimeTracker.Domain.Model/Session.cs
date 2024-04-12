@@ -70,8 +70,8 @@ public class Session : IEntityBase
     /// </summary>
     public IPAddress RequestIp { get; private set; }
 
-    public static Session Create(User user, string accessToken, DateTime accessTokenExpiresAt, string refreshToken, DateTime refreshTokenExpiresAt,
-        IPAddress requestIp)
+    public static Session Create(User user, string accessToken, DateTime accessTokenExpiresAt, string refreshToken,
+        DateTime refreshTokenExpiresAt, IPAddress requestIp)
     {
         var session = new Session
         {
@@ -84,8 +84,10 @@ public class Session : IEntityBase
             CreatedAt = DateTime.UtcNow,
             RequestIp = requestIp
         };
+
         return session;
     }
+
     public Session Revoke(SessionRevocationReason reason, Session? newSession)
     {
         RevokedAt = DateTime.UtcNow;
@@ -93,5 +95,6 @@ public class Session : IEntityBase
         ReplacedBy = newSession;
         return this;
     }
+
     public Session? ReplacedBy { get; private set; }
 }
