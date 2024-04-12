@@ -9,25 +9,25 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0"/>
     </ItemGroup>
 
 
     <ItemGroup>
-      <Reference Include="Microsoft.AspNetCore">
-        <HintPath>..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.app.ref\8.0.1\ref\net8.0\Microsoft.AspNetCore.dll</HintPath>
-      </Reference>
+        <Reference Include="Microsoft.AspNetCore">
+            <HintPath>..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.app.ref\8.0.1\ref\net8.0\Microsoft.AspNetCore.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 
     <ItemGroup>
-      <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository\RGamaFelix.TimeTracker.Repository.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository\RGamaFelix.TimeTracker.Repository.csproj"/>
     </ItemGroup>
 
 </Project>

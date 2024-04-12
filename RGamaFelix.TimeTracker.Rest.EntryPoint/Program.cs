@@ -1,11 +1,9 @@
 using RGamaFelix.TimeTracker.ApplicationService.Configuration;
 using RGamaFelix.TimeTracker.Domain.Service.Configuration;
-using RGamaFelix.TimeTracker.Domain.Service.Handler.Middleware;
 using RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddDomainService();
 builder.Services.AddApplicationService(builder.Configuration.GetSection("JwtConfiguration"));
 builder.Services.UsePostgresSql(builder.Configuration);
@@ -16,22 +14,22 @@ builder.Services.AddIdentityServices(builder.Configuration.GetSection("JwtConfig
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 var app = builder.Build();
 
-app.UseMiddleware<SessionValidationMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(policyBuilder =>
+    {
+        policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
 }
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapControllers();
 app.AddMiddlewares();
-
 app.Run();

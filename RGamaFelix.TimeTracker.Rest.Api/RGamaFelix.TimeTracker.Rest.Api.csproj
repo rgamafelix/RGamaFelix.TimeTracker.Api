@@ -10,29 +10,29 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="12.2.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Identity.Web" Version="2.16.1" />
-        <PackageReference Include="Microsoft.OpenApi" Version="1.6.12" />
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
-        <PackageReference Include="RGamaFelix.ServiceResponse.RestResponse" Version="1.0.0" />
+        <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.Identity.Web" Version="2.16.1"/>
+        <PackageReference Include="Microsoft.OpenApi" Version="1.6.12"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0"/>
+        <PackageReference Include="RGamaFelix.ServiceResponse.RestResponse" Version="1.0.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1"/>
     </ItemGroup>
 
 
     <ItemGroup>
-      <ProjectReference Include="..\RGamaFelix.TimeTracker.ApplicationService\RGamaFelix.TimeTracker.ApplicationService.csproj" />
-      <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj" />
-      <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Model\RGamaFelix.TimeTracker.Rest.Model.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.ApplicationService\RGamaFelix.TimeTracker.ApplicationService.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Model\RGamaFelix.TimeTracker.Rest.Model.csproj"/>
     </ItemGroup>
 
 
     <ItemGroup>
-      <None Remove="Properties\launchSettings.json" />
+        <None Remove="Properties\launchSettings.json"/>
     </ItemGroup>
 
 </Project>

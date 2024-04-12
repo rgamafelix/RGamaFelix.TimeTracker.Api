@@ -1,9 +1,12 @@
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using RGamaFelix.ServiceResponse;
 using RGamaFelix.TimeTracker.Domain.Model;
+using RGamaFelix.TimeTracker.Domain.Service.Handler;
 using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Rest.Model;
 using RGamaFelix.TimeTracker.Tests.Fixture;
@@ -34,7 +37,11 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
             })));
 
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
-        var handler = new CreateRegularUserHandler(validator, logger, _contextMock);
+        var userManagerMock = TestHelper.MockUserManager();
+        var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
+        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
+            authenticationResolverMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -52,10 +59,14 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var request = new CreateRegularUserRequest("ExistingUser", "valid@email.com", "V@l1dpwd");
         var validator = Substitute.For<IValidator<CreateRegularUserRequest>>();
         validator.ValidateAsync(request, CancellationToken.None).Returns(Task.FromResult(new ValidationResult()));
-        var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         _contextMock.Users.Add(User.Create(request.Name, "otehr@email.com"));
         await _contextMock.SaveChangesAsync();
-        var handler = new CreateRegularUserHandler(validator, logger, _contextMock);
+        var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
+        var userManagerMock = TestHelper.MockUserManager();
+        var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
+        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
+            authenticationResolverMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -75,7 +86,15 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var validator = Substitute.For<IValidator<CreateRegularUserRequest>>();
         validator.ValidateAsync(request, CancellationToken.None).Returns(Task.FromResult(new ValidationResult()));
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
-        var handler = new CreateRegularUserHandler(validator, logger, _contextMock);
+        var userManagerMock = TestHelper.MockUserManager();
+        userManagerMock.Users.Returns(new List<User>
+        {
+            User.Create("ExistingUser", request.Email)
+        }.AsQueryable());
+        var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
+        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
+            authenticationResolverMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -95,7 +114,11 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var validator = Substitute.For<IValidator<CreateRegularUserRequest>>();
         validator.ValidateAsync(request, CancellationToken.None).Returns(Task.FromResult(new ValidationResult()));
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
-        var handler = new CreateRegularUserHandler(validator, logger, _contextMock);
+        var userManagerMock = TestHelper.MockUserManager();
+        var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
+        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
+            authenticationResolverMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);

@@ -7,6 +7,7 @@ namespace RGamaFelix.TimeTracker.Rest.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Consumes(MediaTypeNames.Application.Json)]
 [Produces("application/json")]
 public class UserController : ControllerBase
 {
@@ -20,12 +21,12 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    [Route("regular-user")]
-    [Consumes(MediaTypeNames.Application.Json)]
+    [Route("[action]")]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreateUserResponse))]
     public async Task<IActionResult> CreateRegularUser(CreateRegularUserRequest request,
         CancellationToken cancellationToken = default)
     {
-        return await ControllerHelper.ProcessRequest<CreateRegularUserRequest, CreateUserResponse>(_mediator, _logger, request,
-            cancellationToken);
+        return await ControllerHelper.ProcessRequest<CreateRegularUserRequest, CreateUserResponse>(_mediator, _logger,
+            request, cancellationToken);
     }
 }

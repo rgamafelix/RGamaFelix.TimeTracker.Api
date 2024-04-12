@@ -29,7 +29,11 @@ public static class Setup
                 };
             });
 
-        services.AddIdentityCore<User>().AddEntityFrameworkStores<TimeTrackerDbContext>().AddDefaultTokenProviders();
+        services.AddIdentityCore<User>()
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<TimeTrackerDbContext>()
+            .AddDefaultTokenProviders();
+
         services.Configure<IdentityOptions>(options =>
         {
             options.SignIn.RequireConfirmedEmail = false;
@@ -41,14 +45,14 @@ public static class Setup
             options.Password.RequireLowercase = true;
         });
 
-
         return services;
     }
-    
-    public static IApplicationBuilder AddMiddlewares(this IApplicationBuilder app) 
+
+    public static IApplicationBuilder AddMiddlewares(this IApplicationBuilder app)
     {
         return app.UseMiddleware<TokenValidationMiddleware>();
     }
+
     public static IMvcBuilder AddTimeTrackerControllers(this IMvcBuilder mvcBuilder)
     {
         mvcBuilder.AddApplicationPart(typeof(Setup).Assembly);

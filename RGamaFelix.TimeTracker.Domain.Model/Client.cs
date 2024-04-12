@@ -21,7 +21,6 @@ public class Client : AbstractEntityBase
     {
         Name = name;
         NormalizedName = name.ToUpperInvariant();
-
         return this;
     }
 }

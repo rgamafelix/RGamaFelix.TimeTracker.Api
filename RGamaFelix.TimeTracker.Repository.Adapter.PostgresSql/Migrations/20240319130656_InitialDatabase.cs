@@ -276,6 +276,12 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
                 table: "User",
                 column: "NormalizedUserName",
                 unique: true);
+            
+            var admimRoleGuid = Guid.NewGuid();
+            var regularRoleGuid = Guid.NewGuid();
+            
+            migrationBuilder.InsertData("AspNetRoles", new[] { "Id", "Name", "NormalizedName" }, new object[] { admimRoleGuid, "Admin", "ADMIN" });
+            migrationBuilder.InsertData("AspNetRoles", new[] { "Id", "Name", "NormalizedName" }, new object[] {regularRoleGuid, "Regular", "REGULAR" });
         }
 
         /// <inheritdoc />

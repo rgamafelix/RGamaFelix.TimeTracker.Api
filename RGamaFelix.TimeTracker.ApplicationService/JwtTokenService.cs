@@ -19,7 +19,7 @@ public class JwtTokenService : ITokenService
         // Create claims for the token
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, userName),
+            new Claim(ClaimTypes.NameIdentifier, userName)
 
             // Add more claims as needed
         };
@@ -47,7 +47,6 @@ public class JwtTokenService : ITokenService
 
         // Serialize the token to a string
         var tokenString = tokenHandler.WriteToken(token);
-
         return (tokenString, expires);
     }
 
@@ -60,16 +59,16 @@ public class JwtTokenService : ITokenService
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userName),
+                new Claim(ClaimTypes.NameIdentifier, userName)
 
                 // Add any additional claims as needed
             }),
             Expires = expires, // Set the expiration time for the refresh token
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials =
+                new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
-
         return (tokenHandler.WriteToken(token), expires);
     }
 }
