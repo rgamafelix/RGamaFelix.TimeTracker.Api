@@ -4,6 +4,7 @@ using RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddLogging();
 builder.Services.AddDomainService();
 builder.Services.AddApplicationService(builder.Configuration.GetSection("JwtConfiguration"));
 builder.Services.UsePostgresSql(builder.Configuration);
@@ -21,10 +22,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors(policyBuilder =>
-    {
-        policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-    });
+    app.UseCors(policyBuilder => { policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
 }
 
 app.UseHttpsRedirection();

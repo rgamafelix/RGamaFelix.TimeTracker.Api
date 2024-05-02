@@ -1,4 +1,3 @@
-using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +12,13 @@ namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
 
 public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IServiceResultOf<AuthResponse>>
 {
-    private readonly ILogger<RefreshTokenHandler> _logger;
     private readonly TimeTrackerDbContext _dbContext;
-    private readonly ITokenService _tokenService;
     private readonly HttpContext _httpContext;
+    private readonly ILogger<RefreshTokenHandler> _logger;
+    private readonly ITokenService _tokenService;
 
-    public RefreshTokenHandler( ILogger<RefreshTokenHandler> logger,
-        TimeTrackerDbContext dbContext, ITokenService tokenService, IHttpContextAccessor httpContext)
+    public RefreshTokenHandler(ILogger<RefreshTokenHandler> logger, TimeTrackerDbContext dbContext,
+        ITokenService tokenService, IHttpContextAccessor httpContext)
     {
         _logger = logger;
         _dbContext = dbContext;
@@ -30,11 +29,9 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
     public async Task<IServiceResultOf<AuthResponse>> Handle(RefreshTokenRequest request,
         CancellationToken cancellationToken)
     {
-        var user = await _dbContext.Users.Include(u => u.Sessions)
-            .SingleOrDefaultAsync(
-                u => u.NormalizedUserName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase),
-                cancellationToken);
-
+        var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
+            u => u.NormalizedUserName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase),
+            cancellationToken);
         if (user is null)
         {
             _logger.LogWarning("User {User} not found", request.UserName);
@@ -65,7 +62,6 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
         var (refreshToken, refreshTokenExpireDate) = _tokenService.CreateRefreshToken(request.UserName);
         user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
             _httpContext.Connection.RemoteIpAddress);
-
         _dbContext.Update(user);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return ServiceResultOf<AuthResponse>.Success(new AuthResponse(accessToken, refreshToken, user.UserName),

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Repository;
-using RGamaFelix.TimeTracker.Rest.Api.Controllers.Middleware;
+using RGamaFelix.TimeTracker.Rest.Api.Middleware;
 
 namespace RGamaFelix.TimeTracker.Rest.Api.Configuration;
 
@@ -15,25 +15,18 @@ public static class Setup
     {
         var key = Encoding.ASCII.GetBytes(section["SecretKey"]);
         services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(x =>
+        {
+            x.TokenValidationParameters = new TokenValidationParameters
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = true,
-                    ValidateAudience = true
-                };
-            });
-
-        services.AddIdentityCore<User>()
-            .AddRoles<IdentityRole<Guid>>()
-            .AddEntityFrameworkStores<TimeTrackerDbContext>()
+                IssuerSigningKey = new SymmetricSecurityKey(key), ValidateIssuer = true, ValidateAudience = true
+            };
+        });
+        services.AddIdentityCore<User>().AddRoles<IdentityRole<Guid>>().AddEntityFrameworkStores<TimeTrackerDbContext>()
             .AddDefaultTokenProviders();
-
         services.Configure<IdentityOptions>(options =>
         {
             options.SignIn.RequireConfirmedEmail = false;
@@ -44,7 +37,6 @@ public static class Setup
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
         });
-
         return services;
     }
 

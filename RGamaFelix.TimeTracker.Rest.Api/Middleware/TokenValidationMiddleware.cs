@@ -1,4 +1,4 @@
-namespace RGamaFelix.TimeTracker.Rest.Api.Controllers.Middleware;
+namespace RGamaFelix.TimeTracker.Rest.Api.Middleware;
 
 public class TokenValidationMiddleware
 {

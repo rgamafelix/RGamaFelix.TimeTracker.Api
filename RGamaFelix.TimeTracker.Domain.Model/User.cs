@@ -19,19 +19,13 @@ public class User : IdentityUser<Guid>, IEntityBase
     {
         var session = Session.Create(this, accessToken, accessTokenExpiresAt, refreshToken, refreshTokenExpiresAt,
             requestIp);
-
         _sessions.Add(session);
         return session;
     }
 
     public static User Create(string name, string email)
     {
-        return new User()
-        {
-            UserName = name,
-            Email = email,
-            EmailConfirmed = true
-        };
+        return new User { UserName = name, Email = email, EmailConfirmed = true };
     }
 
     /// <summary>
@@ -48,7 +42,6 @@ public class User : IdentityUser<Guid>, IEntityBase
     {
         var newSession = AddSession(accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
             ipAddress);
-
         currentSession.Revoke(SessionRevocationReason.TokenReplaced, newSession);
     }
 }

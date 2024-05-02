@@ -1,13 +1,10 @@
-using Microsoft.Extensions.Configuration;
+namespace RGamaFelix.TimeTracker.ApplicationService.Configuration;
 
-public class JwtConfiguration// : ConfigurationSection
+public class JwtConfiguration
 {
-    public string Audience { get; set; }
     public int AccessTokenExpirationMinutes { get; set; }
+    public string Audience { get; set; }
     public string Issuer { get; set; }
     public int RefreshTokenExpirationDays { get; set; }
     public string SecretKey { get; set; }
-
-    // public JwtConfiguration(IConfigurationRoot root, string path) : base(root, path)
-    // { }
 }
