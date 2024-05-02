@@ -3,7 +3,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using RGamaFelix.TimeTracker.ApplicationService.Configuration;
 using RGamaFelix.TimeTracker.ApplicationService.Contracts;
+
+namespace RGamaFelix.TimeTracker.ApplicationService;
 
 public class JwtTokenService : ITokenService
 {
@@ -67,7 +70,6 @@ public class JwtTokenService : ITokenService
             SigningCredentials =
                 new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
-
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return (tokenHandler.WriteToken(token), expires);
     }

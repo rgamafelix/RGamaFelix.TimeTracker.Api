@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
+namespace RGamaFelix.TimeTracker.ApplicationService.Contracts;
 
 public interface IAuthenticationResolver
 {

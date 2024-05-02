@@ -1,7 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using RGamaFelix.TimeTracker.ApplicationService.Contracts;
 
-namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
+namespace RGamaFelix.TimeTracker.ApplicationService;
 
 public class AuthenticationResolver : IAuthenticationResolver
 {

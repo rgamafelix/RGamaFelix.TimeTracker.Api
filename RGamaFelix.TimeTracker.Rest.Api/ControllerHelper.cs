@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RGamaFelix.ServiceResponse;
 using RGamaFelix.ServiceResponse.RestResponse;
 
-namespace RGamaFelix.TimeTracker.Rest.Api.Controllers;
+namespace RGamaFelix.TimeTracker.Rest.Api;
 
 public class ControllerHelper
 {

@@ -11,8 +11,8 @@ namespace RGamaFelix.TimeTracker.Rest.Api.Controllers;
 [Consumes(MediaTypeNames.Application.Json)]
 public class ClientController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly ILogger<ClientController> _logger;
+    private readonly IMediator _mediator;
 
     public ClientController(IMediator mediator, ILogger<ClientController> logger)
     {

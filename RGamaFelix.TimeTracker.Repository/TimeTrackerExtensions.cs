@@ -30,7 +30,6 @@ public static class TimeTrackerExtensions
         var dtoItems = pageSize.HasValue
             ? await items.Skip((page - 1) * pageSize.Value).Take(pageSize.Value).Select(i => map(i)).ToListAsync()
             : await items.Select(i => map(i)).ToListAsync();
-
         return new PagedResponse<TDto>(dtoItems, total, (int)Math.Ceiling((double)total / pageSize ?? total), page,
             pageSize ?? total);
     }

@@ -8,12 +8,8 @@ namespace RGamaFelix.TimeTracker.Domain.Model;
 public class Session : IEntityBase
 {
     private Session()
-    { }
-
-    /// <summary>
-    ///     Get the unique identifier of the session.
-    /// </summary>
-    public Guid Id { get; private set; }
+    {
+    }
 
     /// <summary>
     ///     Get the access token of the session.
@@ -21,24 +17,19 @@ public class Session : IEntityBase
     public string AccessToken { get; private set; }
 
     /// <summary>
-    ///     Get the date and time when the session was created.
-    /// </summary>
-    public DateTime CreatedAt { get; private set; }
-
-    /// <summary>
     ///     Get the date and time when the access token expires.
     /// </summary>
     public DateTime AccessTokenExpiresAt { get; private set; }
 
     /// <summary>
-    ///     Get the Id of the user that owns the session.
+    ///     Get the date and time when the session was created.
     /// </summary>
-    public Guid UserId { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
     /// <summary>
-    ///     Get the user that owns the session.
+    ///     Indicates whether the session was revoked.
     /// </summary>
-    public User User { get; private set; }
+    public bool IsRevoked => RevokedAt.HasValue;
 
     /// <summary>
     ///     Get the refresh token of the session.
@@ -50,10 +41,12 @@ public class Session : IEntityBase
     /// </summary>
     public DateTime RefreshTokenExpiresAt { get; private set; }
 
+    public Session? ReplacedBy { get; private set; }
+
     /// <summary>
-    ///     Indicates whether the session was revoked.
+    ///     Get the IP address of the request
     /// </summary>
-    public bool IsRevoked => RevokedAt.HasValue;
+    public IPAddress RequestIp { get; private set; }
 
     /// <summary>
     ///     Get the reason why the session was revoked.
@@ -66,9 +59,19 @@ public class Session : IEntityBase
     public DateTime? RevokedAt { get; private set; }
 
     /// <summary>
-    ///     Get the IP address of the request
+    ///     Get the user that owns the session.
     /// </summary>
-    public IPAddress RequestIp { get; private set; }
+    public User User { get; private set; }
+
+    /// <summary>
+    ///     Get the Id of the user that owns the session.
+    /// </summary>
+    public Guid UserId { get; }
+
+    /// <summary>
+    ///     Get the unique identifier of the session.
+    /// </summary>
+    public Guid Id { get; private set; }
 
     public static Session Create(User user, string accessToken, DateTime accessTokenExpiresAt, string refreshToken,
         DateTime refreshTokenExpiresAt, IPAddress requestIp)
@@ -84,7 +87,6 @@ public class Session : IEntityBase
             CreatedAt = DateTime.UtcNow,
             RequestIp = requestIp
         };
-
         return session;
     }
 
@@ -95,6 +97,4 @@ public class Session : IEntityBase
         ReplacedBy = newSession;
         return this;
     }
-
-    public Session? ReplacedBy { get; private set; }
 }

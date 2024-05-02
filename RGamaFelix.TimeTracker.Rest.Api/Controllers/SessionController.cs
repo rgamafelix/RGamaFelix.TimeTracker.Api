@@ -11,8 +11,8 @@ namespace RGamaFelix.TimeTracker.Rest.Api.Controllers;
 [Produces("application/json")]
 public class SessionController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly ILogger<SessionController> _logger;
+    private readonly IMediator _mediator;
 
     public SessionController(IMediator mediator, ILogger<SessionController> logger)
     {
@@ -23,19 +23,19 @@ public class SessionController : ControllerBase
     [HttpPost]
     [Route("[action]")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthResponse))]
-    public async Task<IActionResult> SignIn(SignInRequest request, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> RefreshToken(RefreshTokenRequest request,
+        CancellationToken cancellationToken = default)
     {
-        return await ControllerHelper.ProcessRequest<SignInRequest, AuthResponse>(_mediator, _logger, request,
+        return await ControllerHelper.ProcessRequest<RefreshTokenRequest, AuthResponse>(_mediator, _logger, request,
             cancellationToken);
     }
 
     [HttpPost]
     [Route("[action]")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthResponse))]
-    public async Task<IActionResult> RefreshToken(RefreshTokenRequest request,
-        CancellationToken cancellationToken = default)
+    public async Task<IActionResult> SignIn(SignInRequest request, CancellationToken cancellationToken = default)
     {
-        return await ControllerHelper.ProcessRequest<RefreshTokenRequest, AuthResponse>(_mediator, _logger, request,
+        return await ControllerHelper.ProcessRequest<SignInRequest, AuthResponse>(_mediator, _logger, request,
             cancellationToken);
     }
 }
