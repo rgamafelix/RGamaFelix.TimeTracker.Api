@@ -1,9 +1,8 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace RGamaFElix.TimeTracker.Infrastructure;
+namespace RGamaFelix.TimeTracker.Infrastructure;
 
 public class AuthorizedRequestPreprocessor<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
@@ -43,7 +42,7 @@ public class AuthorizedRequestPreprocessor<TRequest, TResponse> : IPipelineBehav
         {
             if (authorizeRequest.Roles is not null)
             {
-                if (!authorizeRequest.Roles.Any(r => Enumerable.Any<Claim>(claims, c => c.Type == "role" && c.Value == r)))
+                if (!authorizeRequest.Roles.Any(r => claims.Any(c => c.Type == "role" && c.Value == r)))
                 {
                     _logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
                     throw new Exception();
@@ -53,7 +52,7 @@ public class AuthorizedRequestPreprocessor<TRequest, TResponse> : IPipelineBehav
 
             if (authorizeRequest.Claims is not null)
             {
-                if (!authorizeRequest.Claims.Any(r => Enumerable.Any<Claim>(claims, c => c.Type == r)))
+                if (!authorizeRequest.Claims.Any(r => claims.Any(c => c.Type == r)))
                 {
                     _logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
                     throw new Exception();
