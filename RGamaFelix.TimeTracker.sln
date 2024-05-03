@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Rest.EntryPoint", "RGamaFelix.TimeTracker.Rest.EntryPoint\RGamaFelix.TimeTracker.Rest.EntryPoint.csproj", "{588B7604-3543-4CBF-BC0E-E1DC3312B966}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFElix.TimeTracker.Infrastructure", "RGamaFElix.TimeTracker.Infrastructure\RGamaFElix.TimeTracker.Infrastructure.csproj", "{9E1A6660-A66D-492F-9075-63ACCF7BC586}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{588B7604-3543-4CBF-BC0E-E1DC3312B966}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{588B7604-3543-4CBF-BC0E-E1DC3312B966}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{588B7604-3543-4CBF-BC0E-E1DC3312B966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E1A6660-A66D-492F-9075-63ACCF7BC586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E1A6660-A66D-492F-9075-63ACCF7BC586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E1A6660-A66D-492F-9075-63ACCF7BC586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E1A6660-A66D-492F-9075-63ACCF7BC586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

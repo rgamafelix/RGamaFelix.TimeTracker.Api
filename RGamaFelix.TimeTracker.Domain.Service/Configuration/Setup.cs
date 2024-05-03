@@ -2,7 +2,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using RGamaFelix.TimeTracker.Domain.Service.Infrastructure.HandlerPreProcessors;
+using RGamaFElix.TimeTracker.Infrastructure;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Configuration;
 
