@@ -2,7 +2,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace RGamaFElix.TimeTracker.Infrastructure;
+namespace RGamaFelix.TimeTracker.Infrastructure;
 
 public class ValidatedRequestPreprocessor<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull

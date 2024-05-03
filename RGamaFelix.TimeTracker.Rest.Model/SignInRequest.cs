@@ -1,6 +1,6 @@
 using MediatR;
 using RGamaFelix.ServiceResponse;
-using RGamaFElix.TimeTracker.Infrastructure;
+using RGamaFelix.TimeTracker.Infrastructure;
 
 namespace RGamaFelix.TimeTracker.Rest.Model;
 
