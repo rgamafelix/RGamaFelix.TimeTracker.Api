@@ -10,7 +10,7 @@ public static class Setup
     {
         services.AddDbContext<TimeTrackerDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("TimeTrackerDbConnectionString"),
+            options.UseSqlServer(configuration.GetConnectionString("TimeTrackerSqlServerDbConnectionString"),
                     options => { options.MigrationsAssembly("RGamaFelix.TimeTracker.Repository.Adapter.SqlServer"); })
 #if DEBUG
                 .EnableSensitiveDataLogging().EnableDetailedErrors()
