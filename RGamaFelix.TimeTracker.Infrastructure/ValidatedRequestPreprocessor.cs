@@ -1,23 +1,22 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using RGamaFelix.ServiceResponse;
 
 namespace RGamaFelix.TimeTracker.Infrastructure;
 
-public class ValidatedRequestPreprocessor<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : notnull
+public class ValidatedRequestPreprocessor<TRequest, TResponse> : RequestPreprocessorBase<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
-    private readonly ILogger<ValidatedRequestPreprocessor<TRequest, TResponse>> _logger;
     private readonly IValidator<TRequest> _validator;
 
     public ValidatedRequestPreprocessor(IValidator<TRequest> validator,
-        ILogger<ValidatedRequestPreprocessor<TRequest, TResponse>> logger)
+        ILogger<ValidatedRequestPreprocessor<TRequest, TResponse>> logger) : base(logger)
     {
         _validator = validator;
-        _logger = logger;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+    public override async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
@@ -26,9 +25,8 @@ public class ValidatedRequestPreprocessor<TRequest, TResponse> : IPipelineBehavi
             return await next.Invoke();
         }
 
-        _logger.LogWarning("Request validation failed for {RequestType}: {Errors}", nameof(TRequest),
+        Logger.LogWarning("Request validation failed for {RequestType}: {Errors}", nameof(TRequest),
             string.Join(',', validationResult.Errors.Select(x => x.ErrorMessage)));
-        throw new ValidationException(validationResult.Errors);
-        //return validationResult.ToErrorServiceResultOf<TResponse>();
+        return CreateFailResponse(validationResult.Errors.Select(x => x.ErrorMessage), ResultTypeCode.InvalidData);
     }
 }

@@ -1,7 +1,7 @@
 version: "3.0"
 name: time-tracker
 services:
-  db:
+  db-postgres:
     image: postgres:12.1-alpine
 #   restart: always
     environment:
@@ -13,4 +13,17 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
       - ./share:/var/share
+    network_mode: host
+
+  db-sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    environment:
+      SA_PASSWORD: "P@ss5678"
+      ACCEPT_EULA: "Y"
+    ports:
+        - "1433:1433"
+    volumes:
+        - ./mssql-data:/var/opt/mssql
+        - ./share:/var/share
     network_mode: host

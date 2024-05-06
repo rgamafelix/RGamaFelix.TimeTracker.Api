@@ -17,7 +17,7 @@ public class JwtTokenService : ITokenService
         _jwtConfiguration = jwtConfiguration.Value;
     }
 
-    public (string tokenString, DateTime expirationDate) CreateAccessToken(string userName)
+    public (string accessTokenString, DateTime expirationDate) CreateAccessToken(string userName)
     {
         // Create claims for the token
         var claims = new[]
@@ -53,7 +53,7 @@ public class JwtTokenService : ITokenService
         return (tokenString, expires);
     }
 
-    public (string, DateTime expires) CreateRefreshToken(string userName)
+    public (string refreshTokenString, DateTime expires) CreateRefreshToken(string userName)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(_jwtConfiguration.SecretKey);

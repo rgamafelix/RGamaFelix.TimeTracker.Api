@@ -1,66 +1,62 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using RGamaFelix.ServiceResponse;
 
 namespace RGamaFelix.TimeTracker.Infrastructure;
 
-public class AuthorizedRequestPreprocessor<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : notnull
+public class AuthorizedRequestPreprocessor<TRequest, TResponse> : RequestPreprocessorBase<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly ILogger<AuthorizedRequestPreprocessor<TRequest, TResponse>> _logger;
 
     public AuthorizedRequestPreprocessor(IHttpContextAccessor httpContextAccessor,
-        ILogger<AuthorizedRequestPreprocessor<TRequest, TResponse>> logger)
+        ILogger<AuthorizedRequestPreprocessor<TRequest, TResponse>> logger) : base(logger)
     {
         _httpContextAccessor = httpContextAccessor;
-        _logger = logger;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+    public override async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        var authorizeRequestAttribute = request.GetType().GetCustomAttributes(typeof(AutorizeRequestAttribute), true)
-            .FirstOrDefault();
+        var authorizeRequestAttribute = GetAuthorizeRequestAttribute(request);
         if (authorizeRequestAttribute is null)
         {
-            _logger.LogDebug("No authorization required for {RequestType}", nameof(TRequest));
-            var result = await next.Invoke();
-            return result;
+            return await ProcessUnAuthorizedRequest(next);
         }
 
         var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-        if (string.IsNullOrEmpty(token))
+        if (string.IsNullOrEmpty((string)token))
         {
-            _logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
-            throw new Exception();
-            //return ServiceResultOf<TResponse>.Fail("Unauthorized", ResultTypeCode.AuthorizationError);
+            Logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
+            return CreateFailResponse(["Unauthorized request"], ResultTypeCode.AuthorizationError);
         }
 
         var claims = _httpContextAccessor.HttpContext.User.Claims;
-        if (authorizeRequestAttribute is AutorizeRequestAttribute authorizeRequest)
+        if (!authorizeRequestAttribute.Roles!.Any(r => claims.Any(c => c.Type == "role" && c.Value == r)))
         {
-            if (authorizeRequest.Roles is not null)
-            {
-                if (!authorizeRequest.Roles.Any(r => claims.Any(c => c.Type == "role" && c.Value == r)))
-                {
-                    _logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
-                    throw new Exception();
-                    //return ServiceResultOf<TResponse>.Fail("Unauthorized", ResultTypeCode.AuthorizationError);
-                }
-            }
-
-            if (authorizeRequest.Claims is not null)
-            {
-                if (!authorizeRequest.Claims.Any(r => claims.Any(c => c.Type == r)))
-                {
-                    _logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
-                    throw new Exception();
-                    //return ServiceResultOf<TResponse>.Fail("Unauthorized", ResultTypeCode.AuthorizationError);
-                }
-            }
+            Logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
+            return CreateFailResponse(["Unauthorized request"], ResultTypeCode.AuthorizationError);
         }
 
+        if (!authorizeRequestAttribute.Claims!.Any(r => claims.Any(c => c.Type == r)))
+        {
+            Logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
+            return CreateFailResponse(["Unauthorized request"], ResultTypeCode.AuthorizationError);
+        }
+
+        return await next.Invoke();
+    }
+
+    private static AuthorizeRequestAttribute? GetAuthorizeRequestAttribute(TRequest request)
+    {
+        return request.GetType().GetCustomAttributes(typeof(AuthorizeRequestAttribute), true).FirstOrDefault() as
+            AuthorizeRequestAttribute;
+    }
+
+    private async Task<TResponse> ProcessUnAuthorizedRequest(RequestHandlerDelegate<TResponse> next)
+    {
+        Logger.LogDebug("No authorization required for {RequestType}", nameof(TRequest));
         return await next.Invoke();
     }
 }
