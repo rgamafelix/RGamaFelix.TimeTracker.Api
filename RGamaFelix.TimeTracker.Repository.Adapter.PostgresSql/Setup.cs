@@ -10,7 +10,7 @@ public static class Setup
     {
         services.AddDbContext<TimeTrackerDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("TimeTrackerDbConnectionString"),
+            options.UseNpgsql(configuration.GetConnectionString("TimeTrackerPostgresDbConnectionString"),
                     options => { options.MigrationsAssembly("RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql"); })
 #if DEBUG
                 .EnableSensitiveDataLogging().EnableDetailedErrors()
