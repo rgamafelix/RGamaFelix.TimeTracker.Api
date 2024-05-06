@@ -11,7 +11,6 @@ public static class Setup
     {
         services.Configure<JwtConfiguration>(jwtConfigurationSection);
         services.AddScoped<ITokenService, JwtTokenService>();
-        services.AddScoped<IAuthenticationResolver, AuthenticationResolver>();
         return services;
     }
 }

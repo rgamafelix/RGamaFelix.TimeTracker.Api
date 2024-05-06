@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Infraestructure\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Infrastructure\RGamaFelix.TimeTracker.Infrastructure.csproj"/>
     </ItemGroup>
 

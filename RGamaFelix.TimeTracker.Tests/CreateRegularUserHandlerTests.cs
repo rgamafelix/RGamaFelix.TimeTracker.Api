@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using RGamaFelix.ServiceResponse;
-using RGamaFelix.TimeTracker.ApplicationService.Contracts;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Domain.Service.Handler;
 using RGamaFelix.TimeTracker.Repository;
@@ -35,9 +34,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var userManagerMock = TestHelper.MockUserManager();
         userManagerMock.Users.Returns(new List<User> { User.Create("ExistingUser", request.Email) }.AsQueryable());
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
-        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
-            authenticationResolverMock);
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -60,9 +57,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         var userManagerMock = TestHelper.MockUserManager();
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
-        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
-            authenticationResolverMock);
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -83,9 +78,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         var userManagerMock = TestHelper.MockUserManager();
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
-        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
-            authenticationResolverMock);
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -108,9 +101,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         var userManagerMock = TestHelper.MockUserManager();
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var authenticationResolverMock = Substitute.For<IAuthenticationResolver>();
-        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock,
-            authenticationResolverMock);
+        var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);

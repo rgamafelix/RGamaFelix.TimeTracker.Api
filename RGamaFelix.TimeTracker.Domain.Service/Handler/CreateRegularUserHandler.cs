@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
-using RGamaFelix.TimeTracker.ApplicationService.Contracts;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Rest.Model;
@@ -14,20 +13,17 @@ namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
 public class CreateRegularUserHandler : IRequestHandler<CreateRegularUserRequest, IServiceResultOf<CreateUserResponse>>
 {
     public const string UserAlreadyExists = "UserAlreadyExists";
-    private readonly IAuthenticationResolver _authenticationResolver;
     private readonly TimeTrackerDbContext _dbContext;
     private readonly HttpContext _httpContext;
     private readonly ILogger<CreateRegularUserHandler> _logger;
     private readonly UserManager<User> _userManager;
 
     public CreateRegularUserHandler(ILogger<CreateRegularUserHandler> logger, TimeTrackerDbContext dbContext,
-        UserManager<User> userManager, IHttpContextAccessor httpContextAccessor,
-        IAuthenticationResolver authenticationResolver)
+        UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
     {
         _logger = logger;
         _dbContext = dbContext;
         _userManager = userManager;
-        _authenticationResolver = authenticationResolver;
         _httpContext = httpContextAccessor.HttpContext;
     }
 

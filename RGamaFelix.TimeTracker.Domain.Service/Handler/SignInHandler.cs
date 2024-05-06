@@ -12,7 +12,7 @@ using RGamaFelix.TimeTracker.Rest.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
 
-[AutorizeRequest(Roles = ["Admin"])]
+[AuthorizeRequest(Roles = ["Admin"])]
 public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<AuthResponse>>
 {
     private readonly TimeTrackerDbContext _dbContext;
@@ -35,8 +35,9 @@ public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<Aut
     {
         try
         {
+            var userNameForQuery = request.UserName.ToUpperInvariant();
             var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
-                u => u.NormalizedUserName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase),
+                u => u.NormalizedUserName.Equals(userNameForQuery),
                 cancellationToken);
             if (user == null)
             {
