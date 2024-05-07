@@ -5,16 +5,13 @@ namespace RGamaFelix.TimeTracker.Domain.Model;
 
 public class User : IdentityUser<Guid>, IEntityBase
 {
-    private readonly List<Audit> _audits;
     private readonly List<Session> _sessions;
 
     private User()
     {
         _sessions = new List<Session>();
-        _audits = new List<Audit>();
     }
 
-    public IReadOnlyCollection<Audit>? Audits => _audits?.AsReadOnly();
     public IReadOnlyCollection<Session> Sessions => _sessions.AsReadOnly();
 
     public Session AddSession(string accessToken, DateTime accessTokenExpiresAt, string refreshToken,
