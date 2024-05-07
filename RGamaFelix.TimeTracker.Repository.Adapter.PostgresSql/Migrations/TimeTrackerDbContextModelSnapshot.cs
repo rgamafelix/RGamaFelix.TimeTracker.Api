@@ -18,7 +18,7 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -153,38 +153,6 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Audit", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Action")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("Entity")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("EntityType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Memo")
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Audit", (string)null);
-                });
-
             modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Client", b =>
                 {
                     b.Property<Guid>("Id")
@@ -249,7 +217,7 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session");
+                    b.ToTable("Session", (string)null);
                 });
 
             modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.User", b =>
@@ -366,15 +334,6 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Audit", b =>
-                {
-                    b.HasOne("RGamaFelix.TimeTracker.Domain.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Session", b =>
