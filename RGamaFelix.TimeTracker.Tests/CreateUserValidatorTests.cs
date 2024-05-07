@@ -33,7 +33,6 @@ public class CreateUserValidatorTests
     [InlineData("@domain.com")]
     public async Task When_EmailIsInvalid_ShouldReturn_InvalidEmailError(string email)
     {
-
         // Arrange
         var validator = new CreateUserRequestValidator();
         var request = new CreateRegularUserRequest("Valid Name", email, "V@l1dPwd");

@@ -37,8 +37,7 @@ public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<Aut
         {
             var userNameForQuery = request.UserName.ToUpperInvariant();
             var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
-                u => u.NormalizedUserName.Equals(userNameForQuery),
-                cancellationToken);
+                u => u.NormalizedUserName.Equals(userNameForQuery), cancellationToken);
             if (user == null)
             {
                 _logger.LogWarning("User {User} not found", request.UserName);
