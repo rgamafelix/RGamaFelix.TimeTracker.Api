@@ -276,6 +276,11 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+            var admimRoleGuid = Guid.NewGuid();
+            var regularRoleGuid = Guid.NewGuid();
+
+            migrationBuilder.InsertData("AspNetRoles", new[] { "Id", "Name", "NormalizedName" }, new object[] { admimRoleGuid, "Admin", "ADMIN" });
+            migrationBuilder.InsertData("AspNetRoles", new[] { "Id", "Name", "NormalizedName" }, new object[] {regularRoleGuid, "Regular", "REGULAR" });
         }
 
         /// <inheritdoc />
