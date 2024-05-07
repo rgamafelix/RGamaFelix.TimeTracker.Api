@@ -15,7 +15,6 @@ public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     {
     }
 
-    public DbSet<Audit> Audits { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<User> User { get; set; }
 
@@ -27,18 +26,11 @@ public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
             entity.ToTable("Client");
             entity.HasKey(e => e.Id);
         });
-        model.Entity<Audit>(entity =>
-        {
-            entity.ToTable("Audit");
-            entity.HasKey(e => e.Id);
-            entity.HasOne(e => e.User).WithMany().HasForeignKey("UserId");
-        });
         model.Entity<User>(entity =>
         {
             entity.ToTable("User");
             entity.HasKey(e => e.Id);
             entity.HasMany(e => e.Sessions).WithOne().HasForeignKey("UserId");
-            entity.HasMany(e => e.Audits).WithOne().HasForeignKey("UserId");
         });
         model.Entity<Session>(entity =>
         {

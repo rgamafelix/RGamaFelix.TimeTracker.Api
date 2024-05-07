@@ -58,10 +58,6 @@ public class CreateRegularUserHandler : IRequestHandler<CreateRegularUserRequest
                 ResultTypeCode.GenericError);
         }
 
-        var loggedUser = await _userManager.GetUserAsync(_httpContext.User);
-        var audit = Audit.Create(loggedUser!, AuditAction.Created, newUser.Id, newUser.GetType().Name,
-            $"Regular user {newUser.UserName} created.");
-        _dbContext.Audits.Add(audit);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return ServiceResultOf<CreateUserResponse>.Success(
             new CreateUserResponse(newUser.Id, newUser.UserName, newUser.Email, new[] { "Regular" }),
