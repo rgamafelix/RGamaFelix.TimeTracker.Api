@@ -5,10 +5,11 @@ public class Audit
     public AuditAction Action { get; private set; }
     public DateTime Date { get; private set; }
     public Guid Entity { get; private set; }
-    public string EntityType { get; set; }
-    public Guid Id { get; }
+    public string EntityType { get; private set;  }
+    public Guid Id { get; private set; }
     public string? Memo { get; private set; }
     public User? User { get; private set; }
+    public Guid UserId { get; private set; }
 
     public static Audit Create(User? user, AuditAction action, Guid entity, string entityType, string? memo)
     {
