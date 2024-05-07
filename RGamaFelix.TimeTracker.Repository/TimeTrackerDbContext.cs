@@ -31,11 +31,21 @@ public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
         {
             entity.ToTable("Audit");
             entity.HasKey(e => e.Id);
+            entity.HasOne(e => e.User).WithMany().HasForeignKey("UserId");
         });
         model.Entity<User>(entity =>
         {
             entity.ToTable("User");
             entity.HasKey(e => e.Id);
+            entity.HasMany(e => e.Sessions).WithOne().HasForeignKey("UserId");
+            entity.HasMany(e => e.Audits).WithOne().HasForeignKey("UserId");
+        });
+        model.Entity<Session>(entity =>
+        {
+            entity.ToTable("Session");
+            entity.HasKey(e => e.Id);
+            entity.HasOne(e => e.User).WithMany(e => e.Sessions).HasForeignKey("UserId");
+            entity.HasOne(e => e.ReplacedBy).WithMany().HasForeignKey("ReplacedById");
         });
     }
 }
