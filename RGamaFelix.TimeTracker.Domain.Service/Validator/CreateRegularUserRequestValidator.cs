@@ -3,7 +3,7 @@ using RGamaFelix.TimeTracker.Rest.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Validator;
 
-public class CreateUserRequestValidator : AbstractValidator<CreateRegularUserRequest>
+public class CreateRegularUserRequestValidator : AbstractValidator<CreateRegularUserRequest>
 {
     public const string EmptyEmail = "EmptyEmail";
     public const string EmptyName = "EmptyName";
@@ -16,7 +16,7 @@ public class CreateUserRequestValidator : AbstractValidator<CreateRegularUserReq
     public const string PasswordMustContainUpperCaseLetter = "PasswordMustContainUppercaseLetter";
     public const string PasswordTooShort = "PasswordTooShort";
 
-    public CreateUserRequestValidator()
+    public CreateRegularUserRequestValidator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage(EmptyName);
         RuleFor(x => x.Email).NotEmpty().WithMessage(EmptyEmail);
