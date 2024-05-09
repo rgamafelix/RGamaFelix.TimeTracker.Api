@@ -276,12 +276,16 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
                 table: "User",
                 column: "NormalizedUserName",
                 unique: true);
-            
+
             var admimRoleGuid = Guid.NewGuid();
             var regularRoleGuid = Guid.NewGuid();
-            
+            var adminUserGuid = Guid.NewGuid();
+
             migrationBuilder.InsertData("AspNetRoles", new[] { "Id", "Name", "NormalizedName" }, new object[] { admimRoleGuid, "Admin", "ADMIN" });
             migrationBuilder.InsertData("AspNetRoles", new[] { "Id", "Name", "NormalizedName" }, new object[] {regularRoleGuid, "Regular", "REGULAR" });
+            migrationBuilder.InsertData("User", new[] { "Id", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumber", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnd", "LockoutEnabled", "AccessFailedCount" },
+                new object[] { adminUserGuid, "admin", "ADMIN", "adm@adm.com", "ADM@ADM.COM", true, "AQAAAAIAAYagAAAAEPKzXbSgboijiyrDxFcWX9E+Bw8gYJx/P4VMRV6C1t49snzTKkaGWe3ksXGIZP8cUg==", "XZTKSDLBY3KJJOC7BT2TWC2HH6IN5LIE","c7c6591b-34f7-48fd-ab55-b77db7a75b7e", null,false, false, null, true, 0 });
+            migrationBuilder.InsertData("AspNetUserRoles", new[] { "UserId", "RoleId" }, new object[] { adminUserGuid, admimRoleGuid });
         }
 
         /// <inheritdoc />
