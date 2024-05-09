@@ -50,22 +50,25 @@ public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<Aut
                 return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
             }
 
+            Session? newSession = null;
             var currentSession = user.Sessions.SingleOrDefault(s =>
                 s.IsRevoked == false && Equals(s.RequestIp, _httpContext.Connection.RemoteIpAddress));
             var (accessToken, accessTokenExpireDate) = _tokenService.CreateAccessToken(request.UserName);
             var (refreshToken, refreshTokenExpireDate) = _tokenService.CreateRefreshToken(request.UserName);
             if (currentSession != null)
             {
-                user.ReplaceSession(currentSession, accessToken, accessTokenExpireDate, refreshToken,
+                newSession = user.ReplaceSession(currentSession, accessToken, accessTokenExpireDate, refreshToken,
                     refreshTokenExpireDate, _httpContext.Connection.RemoteIpAddress);
             }
             else
             {
-                user.AddSession(accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
+                newSession = user.AddSession(accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
                     _httpContext.Connection.RemoteIpAddress);
             }
 
+            _dbContext.Add(newSession);
             _dbContext.Users.Update(user);
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return ServiceResultOf<AuthResponse>.Success(new AuthResponse(accessToken, refreshToken, request.UserName),
                 ResultTypeCode.Ok);
         }
