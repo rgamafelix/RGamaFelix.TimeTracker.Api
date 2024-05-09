@@ -23,6 +23,16 @@ public class UserController : ControllerBase
     [HttpPost]
     [Route("[action]")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreateUserResponse))]
+    public async Task<IActionResult> CreateAdminUser(CreateAdminUserRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        return await ControllerHelper.ProcessRequest<CreateAdminUserRequest, CreateUserResponse>(_mediator, _logger,
+            request, cancellationToken);
+    }
+
+    [HttpPost]
+    [Route("[action]")]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreateUserResponse))]
     public async Task<IActionResult> CreateRegularUser(CreateRegularUserRequest request,
         CancellationToken cancellationToken = default)
     {

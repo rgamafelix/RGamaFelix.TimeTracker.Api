@@ -37,11 +37,12 @@ public class User : IdentityUser<Guid>, IEntityBase
     /// <param name="refreshToken"></param>
     /// <param name="refreshTokenExpireDate"></param>
     /// <param name="ipAddress"></param>
-    public void ReplaceSession(Session currentSession, string accessToken, DateTime accessTokenExpireDate,
+    public Session ReplaceSession(Session currentSession, string accessToken, DateTime accessTokenExpireDate,
         string refreshToken, DateTime refreshTokenExpireDate, IPAddress ipAddress)
     {
         var newSession = AddSession(accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
             ipAddress);
         currentSession.Revoke(SessionRevocationReason.TokenReplaced, newSession);
+        return newSession;
     }
 }
