@@ -29,8 +29,9 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
     public async Task<IServiceResultOf<AuthResponse>> Handle(RefreshTokenRequest request,
         CancellationToken cancellationToken)
     {
+        var userNameForQuery = request.UserName.ToUpperInvariant();
         var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
-            u => u.NormalizedUserName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase),
+            u => u.NormalizedUserName == userNameForQuery,
             cancellationToken);
         if (user is null)
         {
@@ -60,8 +61,9 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
 
         var (accessToken, accessTokenExpireDate) = _tokenService.CreateAccessToken(request.UserName);
         var (refreshToken, refreshTokenExpireDate) = _tokenService.CreateRefreshToken(request.UserName);
-        user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
+        var newSession = user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
             _httpContext.Connection.RemoteIpAddress);
+        _dbContext.Add(newSession);
         _dbContext.Update(user);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return ServiceResultOf<AuthResponse>.Success(new AuthResponse(accessToken, refreshToken, user.UserName),
