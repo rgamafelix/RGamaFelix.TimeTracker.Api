@@ -1,7 +1,7 @@
 using System.Net.Mime;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RGamaFelix.TimeTracker.Rest.Model;
+using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Rest.Api.Controllers;
 

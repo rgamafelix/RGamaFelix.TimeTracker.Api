@@ -3,10 +3,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using RGamaFelix.TimeTracker.ApplicationService.Configuration;
-using RGamaFelix.TimeTracker.ApplicationService.Contracts;
+using RGamaFelix.TimeTracker.Application.Service.Configuration;
+using RGamaFelix.TimeTracker.Application.Service.Contracts;
 
-namespace RGamaFelix.TimeTracker.ApplicationService;
+namespace RGamaFelix.TimeTracker.Application.Service;
 
 public class JwtTokenService : ITokenService
 {

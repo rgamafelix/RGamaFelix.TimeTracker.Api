@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Infrastructure\RGamaFelix.TimeTracker.Infrastructure.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Application.Infrastructure\RGamaFelix.TimeTracker.Application.Infrastructure.csproj" />
     </ItemGroup>
 
 

@@ -1,4 +1,4 @@
-namespace RGamaFelix.TimeTracker.Infrastructure;
+namespace RGamaFelix.TimeTracker.Application.Infrastructure;
 
 [AttributeUsage(AttributeTargets.All)]
 public class AuthorizeRequestAttribute : Attribute

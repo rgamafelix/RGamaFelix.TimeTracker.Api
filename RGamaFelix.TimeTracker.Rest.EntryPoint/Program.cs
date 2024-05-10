@@ -1,4 +1,4 @@
-using RGamaFelix.TimeTracker.ApplicationService.Configuration;
+using RGamaFelix.TimeTracker.Application.Service.Configuration;
 using RGamaFelix.TimeTracker.Domain.Service.Configuration;
 using RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;

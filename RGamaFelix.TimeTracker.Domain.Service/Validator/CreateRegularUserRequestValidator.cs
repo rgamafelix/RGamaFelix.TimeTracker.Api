@@ -1,5 +1,5 @@
 using FluentValidation;
-using RGamaFelix.TimeTracker.Rest.Model;
+using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Validator;
 

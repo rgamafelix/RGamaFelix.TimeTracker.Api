@@ -26,6 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Application.Service\RGamaFelix.TimeTracker.Application.Service.csproj" />
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj"/>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql\RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.csproj"/>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository.Adapter.SqlServer\RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.csproj"/>

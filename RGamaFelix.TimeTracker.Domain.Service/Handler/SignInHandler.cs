@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
-using RGamaFelix.TimeTracker.ApplicationService.Contracts;
+using RGamaFelix.TimeTracker.Application.Infrastructure;
+using RGamaFelix.TimeTracker.Application.Service.Contracts;
 using RGamaFelix.TimeTracker.Domain.Model;
-using RGamaFelix.TimeTracker.Infrastructure;
 using RGamaFelix.TimeTracker.Repository;
-using RGamaFelix.TimeTracker.Rest.Model;
+using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
 

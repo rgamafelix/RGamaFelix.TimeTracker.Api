@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Model\RGamaFelix.TimeTracker.Domain.Model.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Model\RGamaFelix.TimeTracker.Rest.Model.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Request.Model\RGamaFelix.TimeTracker.Request.Model.csproj" />
     </ItemGroup>
 
     <ItemGroup>

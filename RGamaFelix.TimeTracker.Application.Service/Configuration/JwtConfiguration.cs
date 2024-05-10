@@ -1,4 +1,4 @@
-namespace RGamaFelix.TimeTracker.ApplicationService.Configuration;
+namespace RGamaFelix.TimeTracker.Application.Service.Configuration;
 
 public class JwtConfiguration
 {
