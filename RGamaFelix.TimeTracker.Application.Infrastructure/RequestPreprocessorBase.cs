@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
 
-namespace RGamaFelix.TimeTracker.Infrastructure;
+namespace RGamaFelix.TimeTracker.Application.Infrastructure;
 
 public abstract class RequestPreprocessorBase<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

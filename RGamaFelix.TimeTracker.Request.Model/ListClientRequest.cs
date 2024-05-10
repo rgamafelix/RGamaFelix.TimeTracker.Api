@@ -1,6 +1,6 @@
-using RGamaFelix.TimeTracker.Infrastructure;
+using RGamaFelix.TimeTracker.Application.Infrastructure;
 
-namespace RGamaFelix.TimeTracker.Rest.Model;
+namespace RGamaFelix.TimeTracker.Request.Model;
 
 [AuthorizeRequest]
 public record ListClientRequest(string? Name, int PageSize, int Page)

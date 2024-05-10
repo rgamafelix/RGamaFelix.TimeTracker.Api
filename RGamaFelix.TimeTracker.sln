@@ -6,11 +6,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Domain.Service", "RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj", "{67675B70-8FC9-48A2-892A-C86C8C2456E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.ApplicationService", "RGamaFelix.TimeTracker.ApplicationService\RGamaFelix.TimeTracker.ApplicationService.csproj", "{62ED6FAE-8159-4E0B-993E-F029E44B4A0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Application.Service", "RGamaFelix.TimeTracker.Application.Service\RGamaFelix.TimeTracker.Application.Service.csproj", "{62ED6FAE-8159-4E0B-993E-F029E44B4A0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Tests", "RGamaFelix.TimeTracker.Tests\RGamaFelix.TimeTracker.Tests.csproj", "{294B8D46-38BF-4E31-9B04-DD48F5ACCCB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Rest.Model", "RGamaFelix.TimeTracker.Rest.Model\RGamaFelix.TimeTracker.Rest.Model.csproj", "{E1405F35-A1F0-47A8-854C-D69BB5EFFCB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Request.Model", "RGamaFelix.TimeTracker.Request.Model\RGamaFelix.TimeTracker.Request.Model.csproj", "{E1405F35-A1F0-47A8-854C-D69BB5EFFCB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.ServiceResponse.FluentValidation", "RGamaFelix.TimeTracker.ServiceResponse.FluentValidation\RGamaFelix.TimeTracker.ServiceResponse.FluentValidation.csproj", "{DCD43A7B-87D2-4A16-BFF2-38D75571AA6A}"
 EndProject
@@ -20,9 +20,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Rest.EntryPoint", "RGamaFelix.TimeTracker.Rest.EntryPoint\RGamaFelix.TimeTracker.Rest.EntryPoint.csproj", "{588B7604-3543-4CBF-BC0E-E1DC3312B966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Infrastructure", "RGamaFelix.TimeTracker.Infrastructure\RGamaFelix.TimeTracker.Infrastructure.csproj", "{9E1A6660-A66D-492F-9075-63ACCF7BC586}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Application.Infrastructure", "RGamaFelix.TimeTracker.Application.Infrastructure\RGamaFelix.TimeTracker.Application.Infrastructure.csproj", "{9E1A6660-A66D-492F-9075-63ACCF7BC586}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Repository.Adapter.SqlServer", "RGamaFelix.TimeTracker.Repository.Adapter.SqlServer\RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.csproj", "{E7BAB3AA-BAA0-496C-82B6-BE153C00F90C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7BD92655-89C4-49C0-8E36-1174C97451EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9D1FC868-25A4-46FE-B3F2-9BE2F9EAF602}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{874ECD5E-A223-4415-AD8D-E41097090B7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rest", "Rest", "{58F9F4FC-911B-4681-A03D-A84A801E9113}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Request", "Request", "{6BFE1D5D-3EA5-433E-B02F-81DC7CDF4854}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,5 +88,17 @@ Global
 		{E7BAB3AA-BAA0-496C-82B6-BE153C00F90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7BAB3AA-BAA0-496C-82B6-BE153C00F90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7BAB3AA-BAA0-496C-82B6-BE153C00F90C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E1A6660-A66D-492F-9075-63ACCF7BC586} = {7BD92655-89C4-49C0-8E36-1174C97451EB}
+		{62ED6FAE-8159-4E0B-993E-F029E44B4A0E} = {7BD92655-89C4-49C0-8E36-1174C97451EB}
+		{044A0064-F47B-43E9-8C3B-BC97869D2985} = {9D1FC868-25A4-46FE-B3F2-9BE2F9EAF602}
+		{67675B70-8FC9-48A2-892A-C86C8C2456E2} = {9D1FC868-25A4-46FE-B3F2-9BE2F9EAF602}
+		{1FCE002F-F6DB-4EE7-9178-4712A92F0FDC} = {874ECD5E-A223-4415-AD8D-E41097090B7A}
+		{8044DD0D-D000-4BF9-B9C8-8309023E5725} = {874ECD5E-A223-4415-AD8D-E41097090B7A}
+		{E7BAB3AA-BAA0-496C-82B6-BE153C00F90C} = {874ECD5E-A223-4415-AD8D-E41097090B7A}
+		{D6303CC9-D9D2-4927-9637-5EB865350BF1} = {58F9F4FC-911B-4681-A03D-A84A801E9113}
+		{588B7604-3543-4CBF-BC0E-E1DC3312B966} = {58F9F4FC-911B-4681-A03D-A84A801E9113}
+		{E1405F35-A1F0-47A8-854C-D69BB5EFFCB6} = {6BFE1D5D-3EA5-433E-B02F-81DC7CDF4854}
 	EndGlobalSection
 EndGlobal

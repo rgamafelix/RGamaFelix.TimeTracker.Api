@@ -1,6 +1,6 @@
 using FluentValidation.TestHelper;
 using RGamaFelix.TimeTracker.Domain.Service.Validator;
-using RGamaFelix.TimeTracker.Rest.Model;
+using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Tests;
 

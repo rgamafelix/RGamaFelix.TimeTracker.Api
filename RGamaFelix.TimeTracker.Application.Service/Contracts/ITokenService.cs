@@ -1,4 +1,4 @@
-namespace RGamaFelix.TimeTracker.ApplicationService.Contracts;
+namespace RGamaFelix.TimeTracker.Application.Service.Contracts;
 
 public interface ITokenService
 {

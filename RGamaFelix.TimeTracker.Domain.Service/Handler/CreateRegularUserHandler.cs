@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Repository;
-using RGamaFelix.TimeTracker.Rest.Model;
+using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
 

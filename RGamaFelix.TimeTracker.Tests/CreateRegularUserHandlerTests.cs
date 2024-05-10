@@ -7,7 +7,7 @@ using RGamaFelix.ServiceResponse;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Domain.Service.Handler;
 using RGamaFelix.TimeTracker.Repository;
-using RGamaFelix.TimeTracker.Rest.Model;
+using RGamaFelix.TimeTracker.Request.Model;
 using RGamaFelix.TimeTracker.Tests.Fixture;
 
 namespace RGamaFelix.TimeTracker.Tests;

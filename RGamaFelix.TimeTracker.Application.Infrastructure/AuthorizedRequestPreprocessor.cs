@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
 
-namespace RGamaFelix.TimeTracker.Infrastructure;
+namespace RGamaFelix.TimeTracker.Application.Infrastructure;
 
 public class AuthorizedRequestPreprocessor<TRequest, TResponse> : RequestPreprocessorBase<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
