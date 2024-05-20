@@ -1,4 +1,4 @@
-using RGamaFelix.TimeTracker.Application.Infrastructure;
+using RGamaFelix.TimeTracker.Request.Preprocessor;
 
 namespace RGamaFelix.TimeTracker.Request.Model;
 

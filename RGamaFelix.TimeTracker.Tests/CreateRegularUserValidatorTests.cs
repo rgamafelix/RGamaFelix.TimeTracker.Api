@@ -6,7 +6,7 @@ namespace RGamaFelix.TimeTracker.Tests;
 
 [Trait("Category", "Validator")]
 [Trait("Category", "CreateUser")]
-public class CreateUserValidatorTests
+public class CreateRegularUserValidatorTests
 {
     [Theory]
     [InlineData(null)]
