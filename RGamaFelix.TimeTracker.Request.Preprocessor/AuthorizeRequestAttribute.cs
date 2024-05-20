@@ -1,4 +1,4 @@
-namespace RGamaFelix.TimeTracker.Application.Infrastructure;
+namespace RGamaFelix.TimeTracker.Request.Preprocessor;
 
 [AttributeUsage(AttributeTargets.All)]
 public class AuthorizeRequestAttribute : Attribute
