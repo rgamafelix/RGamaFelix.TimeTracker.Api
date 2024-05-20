@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
 
-namespace RGamaFelix.TimeTracker.Application.Infrastructure;
+namespace RGamaFelix.TimeTracker.Request.Preprocessor;
 
 public class ValidatedRequestPreprocessor<TRequest, TResponse> : RequestPreprocessorBase<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
