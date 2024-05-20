@@ -1,15 +1,18 @@
 using RGamaFelix.TimeTracker.Application.Service.Configuration;
 using RGamaFelix.TimeTracker.Domain.Service.Configuration;
-using RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql;
+using RGamaFelix.TimeTracker.Repository.Adapter.InMemory;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;
+// using RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql;
+// using RGamaFelix.TimeTracker.Repository.Adapter.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLogging();
 builder.Services.AddDomainService();
 builder.Services.AddApplicationService(builder.Configuration.GetSection("JwtConfiguration"));
 // Must Choose One
-builder.Services.UsePostgresSql(builder.Configuration);
-//builder.Services.UseSqlServer(builder.Configuration);
+builder.Services.UseInMemoryDatabase(builder.Configuration);
+// builder.Services.UsePostgresSql(builder.Configuration);
+// builder.Services.UseSqlServer(builder.Configuration);
 // ----------------
 builder.Services.AddControllers().AddTimeTrackerControllers();
 builder.Services.AddIdentityServices(builder.Configuration.GetSection("JwtConfiguration"));
