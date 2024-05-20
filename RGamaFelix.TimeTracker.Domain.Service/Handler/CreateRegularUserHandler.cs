@@ -30,9 +30,9 @@ public class CreateRegularUserHandler : IRequestHandler<CreateRegularUserRequest
     public async Task<IServiceResultOf<CreateUserResponse>> Handle(CreateRegularUserRequest request,
         CancellationToken cancellationToken)
     {
-        if (await _userManager.Users.AnyAsync(
-                u => u.NormalizedUserName.Equals(request.Name, StringComparison.InvariantCultureIgnoreCase) ||
-                    u.NormalizedEmail.Equals(request.Email, StringComparison.InvariantCultureIgnoreCase),
+        var normalizedEmail = request.Email.ToUpperInvariant();
+        var normalizedName = request.Name.ToUpperInvariant();
+        if (await _userManager.Users.AnyAsync(u => u.NormalizedUserName == normalizedName || u.NormalizedEmail == normalizedEmail,
                 cancellationToken))
         {
             _logger.LogWarning("User {UserName}/{UserEmail} already exists", request.Name, request.Email);

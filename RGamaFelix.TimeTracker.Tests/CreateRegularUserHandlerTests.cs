@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using MockQueryable.NSubstitute;
 using NSubstitute;
 using RGamaFelix.ServiceResponse;
 using RGamaFelix.TimeTracker.Domain.Model;
@@ -32,7 +33,9 @@ public class CreateRegularUserHandlerTests : IClassFixture<DataContextFixture>
         validator.ValidateAsync(request, CancellationToken.None).Returns(Task.FromResult(new ValidationResult()));
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         var userManagerMock = TestHelper.MockUserManager();
-        userManagerMock.Users.Returns(new List<User> { User.Create("ExistingUser", request.Email) }.AsQueryable());
+        var userList = new List<User> { User.Create("ExistingUser", request.Email) };
+        var usersMock = userList.AsQueryable().BuildMockDbSet();
+        userManagerMock.Users.Returns(usersMock);
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
         var handler = new CreateRegularUserHandler(logger, _contextMock, userManagerMock, httpAccessorMock);
 
