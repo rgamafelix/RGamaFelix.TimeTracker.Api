@@ -12,7 +12,6 @@
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Model\RGamaFelix.TimeTracker.Domain.Model.csproj"/>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository\RGamaFelix.TimeTracker.Repository.csproj"/>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Request.Model\RGamaFelix.TimeTracker.Request.Model.csproj" />
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.ServiceResponse.FluentValidation\RGamaFelix.TimeTracker.ServiceResponse.FluentValidation.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
