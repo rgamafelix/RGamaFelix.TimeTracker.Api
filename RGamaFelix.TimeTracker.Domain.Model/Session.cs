@@ -8,8 +8,7 @@ namespace RGamaFelix.TimeTracker.Domain.Model;
 public class Session : IEntityBase
 {
     private Session()
-    {
-    }
+    { }
 
     /// <summary>
     ///     Get the access token of the session.

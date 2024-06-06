@@ -14,7 +14,7 @@
         <PackageReference Include="FluentValidation" Version="11.9.1"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.4"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0"/>
-        <PackageReference Include="MockQueryable.EntityFrameworkCore" Version="7.0.1" />
+        <PackageReference Include="MockQueryable.EntityFrameworkCore" Version="7.0.1"/>
         <PackageReference Include="MockQueryable.NSubstitute" Version="7.0.1"/>
         <PackageReference Include="NSubstitute" Version="5.1.0"/>
         <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.17">

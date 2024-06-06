@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
 using RGamaFelix.TimeTracker.Application.Service.Contracts;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Domain.Model;
-using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
@@ -31,8 +31,7 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
     {
         var userNameForQuery = request.UserName.ToUpperInvariant();
         var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
-            u => u.NormalizedUserName == userNameForQuery,
-            cancellationToken);
+            u => u.NormalizedUserName == userNameForQuery, cancellationToken);
         if (user is null)
         {
             _logger.LogWarning("User {User} not found", request.UserName);
@@ -61,8 +60,8 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
 
         var (accessToken, accessTokenExpireDate) = _tokenService.CreateAccessToken(request.UserName);
         var (refreshToken, refreshTokenExpireDate) = _tokenService.CreateRefreshToken(request.UserName);
-        var newSession = user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken, refreshTokenExpireDate,
-            _httpContext.Connection.RemoteIpAddress);
+        var newSession = user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken,
+            refreshTokenExpireDate, _httpContext.Connection.RemoteIpAddress);
         _dbContext.Add(newSession);
         _dbContext.Update(user);
         await _dbContext.SaveChangesAsync(cancellationToken);

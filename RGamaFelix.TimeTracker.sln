@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Domain.Model", "RGamaFelix.TimeTracker.Domain.Model\RGamaFelix.TimeTracker.Domain.Model.csproj", "{044A0064-F47B-43E9-8C3B-BC97869D2985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Repository", "RGamaFelix.TimeTracker.Repository\RGamaFelix.TimeTracker.Repository.csproj", "{1FCE002F-F6DB-4EE7-9178-4712A92F0FDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.DataContext", "RGamaFelix.TimeTracker.DataContext\RGamaFelix.TimeTracker.DataContext.csproj", "{1FCE002F-F6DB-4EE7-9178-4712A92F0FDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Domain.Service", "RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj", "{67675B70-8FC9-48A2-892A-C86C8C2456E2}"
 EndProject

@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
 using RGamaFelix.TimeTracker.Application.Service.Contracts;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Domain.Model;
-using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Request.Model;
 using RGamaFelix.TimeTracker.Request.Preprocessor;
 

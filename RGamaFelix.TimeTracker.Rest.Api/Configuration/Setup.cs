@@ -2,8 +2,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Domain.Model;
-using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Rest.Api.Middleware;
 
 namespace RGamaFelix.TimeTracker.Rest.Api.Configuration;

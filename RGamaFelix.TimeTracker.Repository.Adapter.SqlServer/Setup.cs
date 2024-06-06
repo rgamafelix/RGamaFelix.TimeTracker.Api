@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RGamaFelix.TimeTracker.DataContext;
 
 namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer;
 
@@ -11,7 +12,7 @@ public static class Setup
         services.AddDbContext<TimeTrackerDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("TimeTrackerSqlServerDbConnectionString"),
-                    options => { options.MigrationsAssembly("RGamaFelix.TimeTracker.Repository.Adapter.SqlServer"); })
+                    options => { options.MigrationsAssembly("RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer"); })
 #if DEBUG
                 .EnableSensitiveDataLogging().EnableDetailedErrors()
 #endif

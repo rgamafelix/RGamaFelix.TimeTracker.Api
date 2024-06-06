@@ -3,8 +3,7 @@ namespace RGamaFelix.TimeTracker.Domain.Model;
 public class Client : AbstractEntityBase
 {
     private Client()
-    {
-    }
+    { }
 
     public string Name { get; private set; }
     public string NormalizedName { get; private set; }
