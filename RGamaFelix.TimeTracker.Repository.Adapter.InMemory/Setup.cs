@@ -10,7 +10,8 @@ public static class Setup
     {
         services.AddDbContext<TimeTrackerDbContext>(options =>
         {
-            options.UseInMemoryDatabase("TimeTrackerInMemoryDb");
+            options.UseInMemoryDatabase("TimeTrackerInMemoryDb", config => { config.EnableNullChecks(); })
+                .EnableSensitiveDataLogging().EnableDetailedErrors();
         });
         return services;
     }

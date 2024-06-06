@@ -5,17 +5,16 @@ using RGamaFelix.TimeTracker.Domain.Model;
 
 namespace RGamaFelix.TimeTracker.Repository;
 
-public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, ITimeTrackerDbContext
 {
     public TimeTrackerDbContext()
-    {
-    }
+    { }
 
     public TimeTrackerDbContext(DbContextOptions<TimeTrackerDbContext> options) : base(options)
-    {
-    }
+    { }
 
     public DbSet<Client> Clients { get; set; }
+    public DbSet<Session> Sessions { get; set; }
     public DbSet<User> User { get; set; }
 
     protected override void OnModelCreating(ModelBuilder model)
@@ -40,4 +39,12 @@ public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
             entity.HasOne(e => e.ReplacedBy).WithMany().HasForeignKey("ReplacedById");
         });
     }
+}
+
+public interface ITimeTrackerDbContext
+{
+    DbSet<Client> Clients { get; set; }
+    DbSet<Session> Sessions { get; set; }
+    DbSet<User> User { get; set; }
+    int SaveChanges();
 }

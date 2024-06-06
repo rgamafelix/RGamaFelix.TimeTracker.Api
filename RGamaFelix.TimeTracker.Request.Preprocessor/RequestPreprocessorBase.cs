@@ -21,22 +21,11 @@ public abstract class RequestPreprocessorBase<TRequest, TResponse> : IPipelineBe
     protected static TResponse CreateFailResponse(IEnumerable<string> errorMessages, ResultTypeCode resultTypeCode)
     {
         MethodInfo failMethod;
-        if (typeof(TResponse).GenericTypeArguments.Length != 0)
-        {
-            var type = typeof(TResponse).GenericTypeArguments[0];
-            var resultType = typeof(ServiceResultOf<>).MakeGenericType(type);
-            failMethod = resultType.GetMethod("Fail",
-                BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, CallingConventions.Any,
-                new[] { typeof(string[]), typeof(ResultTypeCode) }, null)!;
-        }
-        else
-        {
-            var resultType = typeof(ServiceResult);
-            failMethod = resultType.GetMethod("Fail",
-                BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, CallingConventions.Any,
-                new[] { typeof(string[]), typeof(ResultTypeCode) }, null)!;
-        }
-
+        var type = typeof(TResponse).GenericTypeArguments[0];
+        var resultType = typeof(ServiceResultOf<>).MakeGenericType(type);
+        failMethod = resultType.GetMethod("Fail",
+            BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, CallingConventions.Any,
+            new[] { typeof(string[]), typeof(ResultTypeCode) }, null)!;
         return (TResponse)failMethod.Invoke(null, [errorMessages, resultTypeCode])!;
     }
 }
