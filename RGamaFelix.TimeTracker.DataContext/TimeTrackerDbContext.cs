@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RGamaFelix.TimeTracker.Domain.Model;
 
-namespace RGamaFelix.TimeTracker.Repository;
+namespace RGamaFelix.TimeTracker.DataContext;
 
 public class TimeTrackerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, ITimeTrackerDbContext
 {

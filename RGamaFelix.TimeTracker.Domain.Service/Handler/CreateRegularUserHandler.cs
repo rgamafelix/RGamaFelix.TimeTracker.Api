@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Domain.Model;
-using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Handler;
@@ -32,8 +32,8 @@ public class CreateRegularUserHandler : IRequestHandler<CreateRegularUserRequest
     {
         var normalizedEmail = request.Email.ToUpperInvariant();
         var normalizedName = request.Name.ToUpperInvariant();
-        if (await _userManager.Users.AnyAsync(u => u.NormalizedUserName == normalizedName || u.NormalizedEmail == normalizedEmail,
-                cancellationToken))
+        if (await _userManager.Users.AnyAsync(
+                u => u.NormalizedUserName == normalizedName || u.NormalizedEmail == normalizedEmail, cancellationToken))
         {
             _logger.LogWarning("User {UserName}/{UserEmail} already exists", request.Name, request.Email);
             return ServiceResultOf<CreateUserResponse>.Fail(UserAlreadyExists, ResultTypeCode.Multiplicity);

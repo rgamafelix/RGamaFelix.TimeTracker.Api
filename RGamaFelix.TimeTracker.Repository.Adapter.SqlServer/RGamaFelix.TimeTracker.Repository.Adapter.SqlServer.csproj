@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository\RGamaFelix.TimeTracker.Repository.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext\RGamaFelix.TimeTracker.DataContext.csproj"/>
     </ItemGroup>
 
 </Project>

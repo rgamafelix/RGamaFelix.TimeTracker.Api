@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Domain.Model;
-using RGamaFelix.TimeTracker.Repository;
 
 namespace RGamaFelix.TimeTracker.Tests.Fixture;
 

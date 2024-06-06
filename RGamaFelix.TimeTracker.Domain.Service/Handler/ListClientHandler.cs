@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RGamaFelix.ServiceResponse;
-using RGamaFelix.TimeTracker.Repository;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Request.Model;
 
 namespace RGamaFelix.TimeTracker.Domain.Service.Handler;

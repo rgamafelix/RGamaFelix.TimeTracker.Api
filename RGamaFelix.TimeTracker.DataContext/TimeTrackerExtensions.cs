@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using RGamaFelix.TimeTracker.Request.Model;
 
-namespace RGamaFelix.TimeTracker.Repository;
+namespace RGamaFelix.TimeTracker.DataContext;
 
 public static class TimeTrackerExtensions
 {

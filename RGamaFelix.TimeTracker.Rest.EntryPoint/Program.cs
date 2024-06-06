@@ -2,9 +2,9 @@ using RGamaFelix.TimeTracker.Application.Service.Configuration;
 using RGamaFelix.TimeTracker.Domain.Service.Configuration;
 using RGamaFelix.TimeTracker.Repository.Adapter.InMemory;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;
-// using RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql;
-// using RGamaFelix.TimeTracker.Repository.Adapter.SqlServer;
 
+// using RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql;
+// using RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLogging();
 builder.Services.AddDomainService();

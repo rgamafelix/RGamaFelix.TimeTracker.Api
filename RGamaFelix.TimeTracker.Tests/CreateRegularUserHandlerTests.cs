@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 using MockQueryable.NSubstitute;
 using NSubstitute;
 using RGamaFelix.ServiceResponse;
+using RGamaFelix.TimeTracker.DataContext;
 using RGamaFelix.TimeTracker.Domain.Model;
 using RGamaFelix.TimeTracker.Domain.Service.Handler;
-using RGamaFelix.TimeTracker.Repository;
 using RGamaFelix.TimeTracker.Request.Model;
 using RGamaFelix.TimeTracker.Tests.Fixture;
 
