@@ -6,4 +6,4 @@ namespace RGamaFelix.TimeTracker.Request.Model;
 
 [AuthorizeRequest]
 public record CreateRegularUserRequest(string Name, string Email, string Password)
-    : IRequest<ServiceResultOf<CreateUserResponse>>;
+    : IRequest<IServiceResultOf<CreateUserResponse>>;
