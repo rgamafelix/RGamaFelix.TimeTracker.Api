@@ -33,13 +33,15 @@ public class AuthorizedRequestPreprocessor<TRequest, TResponse> : RequestPreproc
         }
 
         var claims = _httpContextAccessor.HttpContext.User.Claims;
-        if (!authorizeRequestAttribute.Roles!.Any(r => claims.Any(c => c.Type == "role" && c.Value == r)))
+        if (authorizeRequestAttribute.Roles != null &&
+            !authorizeRequestAttribute.Roles.Any(r => claims.Any(c => c.Type == "role" && c.Value == r)))
         {
             Logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
             return CreateFailResponse(["Unauthorized request"], ResultTypeCode.AuthorizationError);
         }
 
-        if (!authorizeRequestAttribute.Claims!.Any(r => claims.Any(c => c.Type == r)))
+        if (authorizeRequestAttribute.Claims != null &&
+            !authorizeRequestAttribute.Claims.Any(r => claims.Any(c => c.Type == r)))
         {
             Logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
             return CreateFailResponse(["Unauthorized request"], ResultTypeCode.AuthorizationError);
