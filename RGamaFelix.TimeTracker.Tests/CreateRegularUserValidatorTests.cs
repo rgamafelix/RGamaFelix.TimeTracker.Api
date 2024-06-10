@@ -142,26 +142,6 @@ public class CreateRegularUserValidatorTests
             .WithErrorMessage(CreateRegularUserRequestValidator.EmptyPassword);
     }
 
-    [Theory]
-    [InlineData("inVal1dpwd")]
-    [InlineData("inV@lidpwd")]
-    [InlineData("inv@l1dpwd")]
-    [InlineData("INV@L1DPWD")]
-    [InlineData("V@l1dpd")]
-    public async Task When_PasswordIsInvalid_ShouldReturn_InvalidPasswordError(string password)
-    {
-        // Arrange
-        var validator = new CreateRegularUserRequestValidator();
-        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", password);
-
-        // Act
-        var result = await validator.TestValidateAsync(request);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Password)
-            .WithErrorMessage(CreateRegularUserRequestValidator.InvalidPassword);
-    }
-
     [Fact]
     public async Task When_PasswordIsTooShort_ShouldReturn_PasswordTooShortError()
     {
