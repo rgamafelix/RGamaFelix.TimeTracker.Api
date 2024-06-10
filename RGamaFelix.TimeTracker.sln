@@ -34,6 +34,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Request", "Request", "{6BFE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGamaFelix.TimeTracker.Repository.Adapter.InMemory", "RGamaFelix.TimeTracker.Repository.Adapter.InMemory\RGamaFelix.TimeTracker.Repository.Adapter.InMemory.csproj", "{A26CF44F-E739-47BE-8D86-6A23774AC8B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{F09B7950-A2FC-4252-87EF-28A611284EF2}"
+	ProjectSection(SolutionItems) = preProject
+		README.MD = README.MD
+		Assets\docker-compose.yml = Assets\docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
