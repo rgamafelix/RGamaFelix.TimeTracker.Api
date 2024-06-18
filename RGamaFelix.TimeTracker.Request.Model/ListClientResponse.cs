@@ -1,3 +1,3 @@
 namespace RGamaFelix.TimeTracker.Request.Model;
 
-public record ListClientResponse(Guid id, string Name);
+public record ListClientResponse(Guid Id, string Name);

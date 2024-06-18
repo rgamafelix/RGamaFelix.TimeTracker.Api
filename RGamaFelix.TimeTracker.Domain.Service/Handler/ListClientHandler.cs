@@ -21,9 +21,17 @@ public class ListClientHandler : IRequestHandler<ListClientRequest, IServiceResu
     public async Task<IServiceResultOf<PagedResponse<ListClientResponse>>> Handle(ListClientRequest request,
         CancellationToken cancellationToken)
     {
-        var data = await _dbContext.Clients.GetPaginated(
-            client => EF.Functions.Like(client.NormalizedName, $"%{(request.Name ?? "").ToUpperInvariant()}%"),
-            request.Page, request.PageSize, client => new ListClientResponse(client.Id, client.Name));
-        return ServiceResultOf<PagedResponse<ListClientResponse>>.Success(data, ResultTypeCode.Ok);
+        try
+        {
+            var data = await _dbContext.Clients.GetPaginated(
+                client => EF.Functions.Like(client.NormalizedName, $"%{(request.Name ?? "").ToUpperInvariant()}%"),
+                request.Page, request.PageSize, client => new ListClientResponse(client.Id, client.Name));
+            return ServiceResultOf<PagedResponse<ListClientResponse>>.Success(data, ResultTypeCode.Ok);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error listing clients");
+            return ServiceResultOf<PagedResponse<ListClientResponse>>.Fail(e);
+        }
     }
 }

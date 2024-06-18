@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RGamaFelix.TimeTracker.DataContext;
 
 namespace RGamaFelix.TimeTracker.DataContext.Adapter.InMemory;
 

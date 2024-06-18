@@ -1,6 +1,6 @@
 using RGamaFelix.TimeTracker.Application.Service.Configuration;
-using RGamaFelix.TimeTracker.Domain.Service.Configuration;
 using RGamaFelix.TimeTracker.DataContext.Adapter.InMemory;
+using RGamaFelix.TimeTracker.Domain.Service.Configuration;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;
 
 // using RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql;
@@ -35,5 +35,4 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.AddMiddlewares();
 app.Run();

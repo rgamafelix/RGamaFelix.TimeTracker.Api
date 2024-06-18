@@ -12,11 +12,11 @@ public class CreateRegularUserValidatorTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public async Task When_EmailIsEmpty_ShouldReturn_EmptyEmailError(string email)
+    public async Task When_EmailIsEmpty_ShouldReturn_EmptyEmailError(string? email)
     {
         // Arrange
         var validator = new CreateRegularUserRequestValidator();
-        var request = new CreateRegularUserRequest("Valid Name", email, "V@l1dPwd");
+        var request = new CreateRegularUserRequest("Valid Name", email!, "V@l1dPwd");
 
         // Act
         var result = await validator.TestValidateAsync(request);
@@ -128,11 +128,11 @@ public class CreateRegularUserValidatorTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public async Task When_PasswordIsEmpty_ShouldReturn_EmptyPasswordError(string password)
+    public async Task When_PasswordIsEmpty_ShouldReturn_EmptyPasswordError(string? password)
     {
         // Arrange
         var validator = new CreateRegularUserRequestValidator();
-        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", password);
+        var request = new CreateRegularUserRequest("Valid Name", "valid@email.com", password!);
 
         // Act
         var result = await validator.TestValidateAsync(request);

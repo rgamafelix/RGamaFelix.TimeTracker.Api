@@ -13,13 +13,18 @@ namespace RGamaFelix.TimeTracker.Tests;
 
 [Trait("Category", "Authorization")]
 [Trait("Category", "Preprocessor")]
-public class AuthorizedRequestPreprocessorTests : IClassFixture<TestFixture>
+public class AuthorizedRequestPreprocessorTests : IClassFixture<TestFixture>, IDisposable
 {
     private readonly TestFixture _fixture;
 
     public AuthorizedRequestPreprocessorTests(TestFixture fixture)
     {
         _fixture = fixture;
+    }
+
+    public void Dispose()
+    {
+        _fixture.Dispose();
     }
 
     [Fact]

@@ -26,7 +26,7 @@ public class AuthorizedRequestPreprocessor<TRequest, TResponse> : RequestPreproc
         }
 
         var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-        if (string.IsNullOrEmpty((string)token))
+        if (string.IsNullOrWhiteSpace(token))
         {
             Logger.LogWarning("Unauthorized request for {RequestType}", nameof(TRequest));
             return CreateFailResponse(["Unauthorized request"], ResultTypeCode.AuthorizationError);

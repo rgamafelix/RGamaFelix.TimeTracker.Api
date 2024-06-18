@@ -13,13 +13,18 @@ namespace RGamaFelix.TimeTracker.Tests;
 
 [Trait("Category", "Handler")]
 [Trait("Category", "CreateUser")]
-public class CreateRegularUserHandlerTests : IClassFixture<TestFixture>
+public class CreateRegularUserHandlerTests : IClassFixture<TestFixture>, IDisposable
 {
     private readonly TestFixture _fixture;
 
     public CreateRegularUserHandlerTests(TestFixture fixture)
     {
         _fixture = fixture;
+    }
+
+    public void Dispose()
+    {
+        _fixture.Dispose();
     }
 
     [Fact]
@@ -34,7 +39,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<TestFixture>
         var userManagerMock = _fixture.UserManagerMock;
         await userManagerMock.CreateAsync(User.Create("ExistingUser", request.Email), request.Password);
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var handler = new CreateRegularUserHandler(logger, contextMock, userManagerMock, httpAccessorMock);
+        var handler = new CreateRegularUserHandler(logger, contextMock, userManagerMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -57,7 +62,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<TestFixture>
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         var userManagerMock = _fixture.UserManagerMock;
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var handler = new CreateRegularUserHandler(logger, contextMock, userManagerMock, httpAccessorMock);
+        var handler = new CreateRegularUserHandler(logger, contextMock, userManagerMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);
@@ -81,7 +86,7 @@ public class CreateRegularUserHandlerTests : IClassFixture<TestFixture>
         var logger = Substitute.For<ILogger<CreateRegularUserHandler>>();
         var userManagerMock = _fixture.UserManagerMock;
         var httpAccessorMock = Substitute.For<IHttpContextAccessor>();
-        var handler = new CreateRegularUserHandler(logger, contextMock, userManagerMock, httpAccessorMock);
+        var handler = new CreateRegularUserHandler(logger, contextMock, userManagerMock);
 
         // Act
         var result = await handler.Handle(request, CancellationToken.None);

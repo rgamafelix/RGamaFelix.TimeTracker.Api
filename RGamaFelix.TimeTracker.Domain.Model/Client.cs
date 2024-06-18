@@ -7,6 +7,7 @@ public class Client : IEntityBase
 
     public string Name { get; private set; }
     public string NormalizedName { get; private set; }
+    public Guid Id { get; }
 
     public static Client Create(string name)
     {
@@ -19,6 +20,4 @@ public class Client : IEntityBase
         NormalizedName = name.ToUpperInvariant();
         return this;
     }
-
-    public Guid Id { get; private set; }
 }

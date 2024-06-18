@@ -37,7 +37,7 @@ public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<Aut
         {
             var userNameForQuery = request.UserName.ToUpperInvariant();
             var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
-                u => u.NormalizedUserName.Equals(userNameForQuery), cancellationToken);
+                u => (u.NormalizedUserName ?? "").Equals(userNameForQuery), cancellationToken);
             if (user == null)
             {
                 _logger.LogWarning("User {User} not found", request.UserName);
@@ -50,7 +50,7 @@ public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<Aut
                 return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
             }
 
-            Session? newSession = null;
+            Session? newSession;
             var currentSession = user.Sessions.SingleOrDefault(s =>
                 s.IsRevoked == false && Equals(s.RequestIp, _httpContext.Connection.RemoteIpAddress));
             var (accessToken, accessTokenExpireDate) = _tokenService.CreateAccessToken(request.UserName);
@@ -74,6 +74,7 @@ public class SignInHandler : IRequestHandler<SignInRequest, IServiceResultOf<Aut
         }
         catch (Exception e)
         {
+            _logger.LogError(e, "Error signing in user {User}", request.UserName);
             return ServiceResultOf<AuthResponse>.Fail(e);
         }
     }

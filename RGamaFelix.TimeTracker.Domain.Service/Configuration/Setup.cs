@@ -16,8 +16,6 @@ public static class Setup
             configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizedRequestPreprocessor<,>));
             configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidatedRequestPreprocessor<,>));
         });
-        // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatedRequestPreprocessor<,>));
-        // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizedRequestPreprocessor<,>));
         services.AddHttpContextAccessor();
         services.AddValidatorsFromAssembly(typeof(Setup).Assembly);
         services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });

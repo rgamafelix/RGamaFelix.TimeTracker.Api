@@ -5,7 +5,7 @@ using RGamaFelix.ServiceResponse.RestResponse;
 
 namespace RGamaFelix.TimeTracker.Rest.Api;
 
-public class ControllerHelper
+public static class ControllerHelper
 {
     public static async Task<IActionResult> ProcessRequest<TRequest, TResponse>(IMediator mediator, ILogger logger,
         TRequest request, CancellationToken cancellationToken) where TRequest : IRequest<IServiceResultOf<TResponse>>

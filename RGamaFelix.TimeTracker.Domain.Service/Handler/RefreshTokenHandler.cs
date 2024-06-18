@@ -29,43 +29,51 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenRequest, IService
     public async Task<IServiceResultOf<AuthResponse>> Handle(RefreshTokenRequest request,
         CancellationToken cancellationToken)
     {
-        var userNameForQuery = request.UserName.ToUpperInvariant();
-        var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
-            u => u.NormalizedUserName == userNameForQuery, cancellationToken);
-        if (user is null)
+        try
         {
-            _logger.LogWarning("User {User} not found", request.UserName);
-            return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
-        }
+            var userNameForQuery = request.UserName.ToUpperInvariant();
+            var user = await _dbContext.Users.Include(u => u.Sessions).SingleOrDefaultAsync(
+                u => u.NormalizedUserName == userNameForQuery, cancellationToken);
+            if (user is null)
+            {
+                _logger.LogWarning("User {User} not found", request.UserName);
+                return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
+            }
 
-        var session = user?.Sessions.SingleOrDefault(s => s.RefreshToken == request.RefreshToken);
-        if (session is null)
+            var session = user.Sessions.SingleOrDefault(s => s.RefreshToken == request.RefreshToken);
+            if (session is null)
+            {
+                _logger.LogWarning("Session not found for user {User}", request.UserName);
+                return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
+            }
+
+            if (session.IsRevoked)
+            {
+                _logger.LogWarning("Session revoked for user {User}", request.UserName);
+                return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
+            }
+
+            if (session.RefreshTokenExpiresAt < DateTime.UtcNow)
+            {
+                _logger.LogWarning("Refresh token expired for user {User}", request.UserName);
+                session.Revoke(SessionRevocationReason.TokenExpired, null);
+                return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
+            }
+
+            var (accessToken, accessTokenExpireDate) = _tokenService.CreateAccessToken(request.UserName);
+            var (refreshToken, refreshTokenExpireDate) = _tokenService.CreateRefreshToken(request.UserName);
+            var newSession = user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken,
+                refreshTokenExpireDate, _httpContext.Connection.RemoteIpAddress);
+            _dbContext.Add(newSession);
+            _dbContext.Update(user);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return ServiceResultOf<AuthResponse>.Success(new AuthResponse(accessToken, refreshToken, user.UserName!),
+                ResultTypeCode.Ok);
+        }
+        catch (Exception e)
         {
-            _logger.LogWarning("Session not found for user {User}", request.UserName);
-            return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
+            _logger.LogError(e, "Error refreshing token for user {User}", request.UserName);
+            return ServiceResultOf<AuthResponse>.Fail(e);
         }
-
-        if (session.IsRevoked)
-        {
-            _logger.LogWarning("Session revoked for user {User}", request.UserName);
-            return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
-        }
-
-        if (session.RefreshTokenExpiresAt < DateTime.UtcNow)
-        {
-            _logger.LogWarning("Refresh token expired for user {User}", request.UserName);
-            session.Revoke(SessionRevocationReason.TokenExpired, null);
-            return ServiceResultOf<AuthResponse>.Fail("AuthenticationError", ResultTypeCode.AuthenticationError);
-        }
-
-        var (accessToken, accessTokenExpireDate) = _tokenService.CreateAccessToken(request.UserName);
-        var (refreshToken, refreshTokenExpireDate) = _tokenService.CreateRefreshToken(request.UserName);
-        var newSession = user.ReplaceSession(session, accessToken, accessTokenExpireDate, refreshToken,
-            refreshTokenExpireDate, _httpContext.Connection.RemoteIpAddress);
-        _dbContext.Add(newSession);
-        _dbContext.Update(user);
-        await _dbContext.SaveChangesAsync(cancellationToken);
-        return ServiceResultOf<AuthResponse>.Success(new AuthResponse(accessToken, refreshToken, user.UserName),
-            ResultTypeCode.Ok);
     }
 }
