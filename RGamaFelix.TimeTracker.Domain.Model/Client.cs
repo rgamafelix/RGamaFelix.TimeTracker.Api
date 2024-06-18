@@ -1,6 +1,6 @@
 namespace RGamaFelix.TimeTracker.Domain.Model;
 
-public class Client : AbstractEntityBase
+public class Client : IEntityBase
 {
     private Client()
     { }
@@ -19,4 +19,6 @@ public class Client : AbstractEntityBase
         NormalizedName = name.ToUpperInvariant();
         return this;
     }
+
+    public Guid Id { get; private set; }
 }
