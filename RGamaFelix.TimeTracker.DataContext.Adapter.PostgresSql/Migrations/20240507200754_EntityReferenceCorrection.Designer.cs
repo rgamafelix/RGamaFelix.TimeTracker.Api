@@ -10,7 +10,7 @@ using RGamaFelix.TimeTracker.DataContext;
 
 #nullable disable
 
-namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
+namespace RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
     [Migration("20240507200754_EntityReferenceCorrection")]

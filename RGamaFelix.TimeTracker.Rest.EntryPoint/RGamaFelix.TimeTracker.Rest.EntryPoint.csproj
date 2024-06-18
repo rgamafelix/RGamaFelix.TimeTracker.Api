@@ -28,9 +28,9 @@
     <ItemGroup>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Application.Service\RGamaFelix.TimeTracker.Application.Service.csproj"/>
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository.Adapter.InMemory\RGamaFelix.TimeTracker.Repository.Adapter.InMemory.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql\RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Repository.Adapter.SqlServer\RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.InMemory\RGamaFelix.TimeTracker.DataContext.Adapter.InMemory.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql\RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer\RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer.csproj" />
         <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Api\RGamaFelix.TimeTracker.Rest.Api.csproj"/>
     </ItemGroup>
 

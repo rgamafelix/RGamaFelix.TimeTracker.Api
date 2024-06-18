@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RGamaFelix.TimeTracker.DataContext;
 
-namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer;
+namespace RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer;
 
 public static class Setup
 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
+namespace RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer.Migrations
 {
     /// <inheritdoc />
     public partial class EntityReferenceCorrection : Migration

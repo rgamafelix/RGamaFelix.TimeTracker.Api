@@ -1,6 +1,6 @@
 using RGamaFelix.TimeTracker.Application.Service.Configuration;
 using RGamaFelix.TimeTracker.Domain.Service.Configuration;
-using RGamaFelix.TimeTracker.Repository.Adapter.InMemory;
+using RGamaFelix.TimeTracker.DataContext.Adapter.InMemory;
 using RGamaFelix.TimeTracker.Rest.Api.Configuration;
 
 // using RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql;

@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace RGamaFelix.TimeTracker.Repository.Adapter.PostgresSql.Migrations
+namespace RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql.Migrations
 {
     /// <inheritdoc />
     public partial class InitialDatabase : Migration

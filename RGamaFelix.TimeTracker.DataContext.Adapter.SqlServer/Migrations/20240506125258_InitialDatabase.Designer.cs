@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RGamaFelix.TimeTracker.DataContext;
 
 #nullable disable
 
-namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
+namespace RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    partial class TimeTrackerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240506125258_InitialDatabase")]
+    partial class InitialDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,6 +156,38 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Audit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Action")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Entity")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Memo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Audit", (string)null);
+                });
+
             modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Client", b =>
                 {
                     b.Property<Guid>("Id")
@@ -208,16 +243,16 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
                     b.Property<DateTime?>("RevokedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("UserId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ReplacedById");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
-                    b.ToTable("Session", (string)null);
+                    b.ToTable("Session");
                 });
 
             modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.User", b =>
@@ -337,6 +372,15 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Audit", b =>
+                {
+                    b.HasOne("RGamaFelix.TimeTracker.Domain.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RGamaFelix.TimeTracker.Domain.Model.Session", b =>
                 {
                     b.HasOne("RGamaFelix.TimeTracker.Domain.Model.Session", "ReplacedBy")
@@ -345,7 +389,7 @@ namespace RGamaFelix.TimeTracker.Repository.Adapter.SqlServer.Migrations
 
                     b.HasOne("RGamaFelix.TimeTracker.Domain.Model.User", "User")
                         .WithMany("Sessions")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
