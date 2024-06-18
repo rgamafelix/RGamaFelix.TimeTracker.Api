@@ -41,7 +41,7 @@ public class Session : IEntityBase
     public DateTime RefreshTokenExpiresAt { get; private set; }
 
     public Session? ReplacedBy { get; private set; }
-    public Guid? ReplacedById { get; }
+    public Guid? ReplacedById { get; private set; }
 
     /// <summary>
     ///     Get the IP address of the request
@@ -66,7 +66,7 @@ public class Session : IEntityBase
     /// <summary>
     ///     Get the Id of the user that owns the session.
     /// </summary>
-    public Guid UserId { get; }
+    public Guid UserId { get; private set; }
 
     /// <summary>
     ///     Get the unique identifier of the session.
