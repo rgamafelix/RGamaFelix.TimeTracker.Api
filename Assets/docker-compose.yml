@@ -1,4 +1,3 @@
-version: "3.0"
 services:
   db-postgres:
     image: postgres:12.1-alpine
@@ -32,3 +31,17 @@ services:
       # Adding share volume in develop to facilitate sharing files between host and container
       - ./share:/var/share
     network_mode: host
+
+  sec:
+    image: datalust/seq:latest
+    container_name: time-tracker-seq
+    restart: always
+    environment:
+      ACCEPT_EULA: Y
+    ports:
+      - "5341:80"
+    volumes:
+      - ./seq-data:/data
+      - ./seq-config:/config
+      - ./seq-logs:/logs
+      - ./share:/var/share

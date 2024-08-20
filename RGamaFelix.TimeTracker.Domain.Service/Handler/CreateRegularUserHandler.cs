@@ -27,6 +27,7 @@ public class CreateRegularUserHandler : IRequestHandler<CreateRegularUserRequest
     public async Task<IServiceResultOf<CreateUserResponse>> Handle(CreateRegularUserRequest request,
         CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Handling request to create user {UserName}", request.Name);
         try
         {
             var normalizedEmail = request.Email.ToUpperInvariant();
