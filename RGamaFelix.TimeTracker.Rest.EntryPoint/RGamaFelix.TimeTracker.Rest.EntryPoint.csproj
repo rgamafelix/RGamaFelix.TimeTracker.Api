@@ -12,15 +12,15 @@
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.9.0" />
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,12 +30,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Application.Service\RGamaFelix.TimeTracker.Application.Service.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.InMemory\RGamaFelix.TimeTracker.DataContext.Adapter.InMemory.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql\RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer\RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer.csproj"/>
-        <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Api\RGamaFelix.TimeTracker.Rest.Api.csproj"/>
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Application.Service\RGamaFelix.TimeTracker.Application.Service.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Domain.Service\RGamaFelix.TimeTracker.Domain.Service.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.InMemory\RGamaFelix.TimeTracker.DataContext.Adapter.InMemory.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql\RGamaFelix.TimeTracker.DataContext.Adapter.PostgresSql.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer\RGamaFelix.TimeTracker.DataContext.Adapter.SqlServer.csproj" />
+        <ProjectReference Include="..\RGamaFelix.TimeTracker.Rest.Api\RGamaFelix.TimeTracker.Rest.Api.csproj" />
     </ItemGroup>
 
 </Project>

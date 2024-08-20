@@ -9,3 +9,5 @@ riderModule.iml
 Assets/postgres-data/
 Assets/mssql-data/
 Assets/share/
+Assets/seq-data/
+*.user
